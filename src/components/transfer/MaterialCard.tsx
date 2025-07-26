@@ -49,7 +49,7 @@ export default function MaterialCard({
                 className={`w-full h-full flex items-center justify-center ${material.image ? "hidden" : ""}`}
               >
                 {/* <div className="p-2 sm:p-4 bg-gradient-to-br from-green-100 to-emerald-200 rounded-full group-hover:scale-110 transition-transform duration-300">
-                  <InventoryIcon className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
+                  <InventoryIcon className="w-6 h-6 sm:w-8 sm:h-8 tasqsdssdext-green-600" />
                 </div> */}
               </div>
               {/* Overlay on hover */}
