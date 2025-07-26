@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Box, Button, Typography, AlertColor, IconButton } from "@mui/material";
+import {
+  Modal,
+  Box,
+  Button,
+  Typography,
+  AlertColor,
+  IconButton,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import FormGenerator from "@/components/main/FormGenerator";
 import ToastMessage from "@/components/dashboard/ToastMessage";
@@ -75,7 +82,12 @@ export default function MaterialUpdate({
 
   const inputFields = [
     { name: "name", label: "Material Name", type: "text", field: "text" },
-    { name: "description", label: "Description", type: "text", field: "textArea" },
+    {
+      name: "description",
+      label: "Description",
+      type: "text",
+      field: "textArea",
+    },
     { name: "type", label: "Type", type: "text", field: "text" },
     {
       name: "unit",
@@ -94,7 +106,8 @@ export default function MaterialUpdate({
       label: "Material Image",
       type: "file",
       field: "file",
-      preview: typeof initialData?.image === "string" ? initialData?.image : undefined,
+      preview:
+        typeof initialData?.image === "string" ? initialData?.image : undefined,
     },
   ];
 
@@ -126,57 +139,47 @@ export default function MaterialUpdate({
         severity: "info",
       });
 
-      if (!initialData) return;
-
-      const formDataToSend = new FormData();
-      formDataToSend.append("id", String(formData.id));
-
-      // Only send changed fields
-      if (formData.name !== initialData.name) {
-        formDataToSend.append("name", formData.name);
-      }
-      if (formData.description !== initialData.description) {
-        formDataToSend.append("description", formData.description);
-      }
-      if (formData.type !== initialData.type) {
-        formDataToSend.append("type", formData.type);
-      }
-      if (formData.unit !== initialData.unit) {
-        formDataToSend.append("unit", formData.unit);
-      }
-      if (formData.cost !== initialData.cost) {
-        formDataToSend.append("cost", formData.cost);
-      }
-      if (formData.quantity !== initialData.quantity) {
-        formDataToSend.append("quantity", formData.quantity);
-      }
-      if (formData.supplier !== initialData.supplier) {
-        formDataToSend.append("supplier", formData.supplier);
-      }
-      if (formData.gsm !== initialData.gsm) {
-        formDataToSend.append("gsm", formData.gsm);
-      }
-      if (formData.color !== initialData.color) {
-        formDataToSend.append("color", formData.color);
+      if (!initialData) {
+        setToast({
+          open: true,
+          message: "No material data to update",
+          severity: "error",
+        });
+        return;
       }
 
-      // If image changed or is a new file
-      if (
-        formData.image instanceof File ||
-        (typeof formData.image === "string" &&
-          formData.image !== initialData.image)
-      ) {
-        formDataToSend.append("image", formData.image as File);
+      // Validate required fields
+      if (!formData.name.trim()) {
+        setToast({
+          open: true,
+          message: "Material name is required",
+          severity: "error",
+        });
+        return;
       }
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/materials/update`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/materials/${formData.id}`,
         {
-          method: "POST",
-          body: formDataToSend,
+          method: "PUT",
           headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer 3|85MPD3fuiEGXIJYlvgV0PCOhLPVEzLL2JBBJl349f9ff23f6",
             Accept: "application/json",
           },
+          body: JSON.stringify({
+            id: formData.id,
+            name: formData.name,
+            description: formData.description,
+            type: formData.type,
+            unit: formData.unit,
+            cost: formData.cost,
+            quantity: formData.quantity,
+            supplier: formData.supplier,
+            gsm: formData.gsm,
+            color: formData.color,
+          }),
         }
       );
 

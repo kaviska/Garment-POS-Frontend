@@ -79,3 +79,29 @@ export interface StockPriceType {
         };
     }>;
 }
+
+export interface TransferItem {
+    id: number;
+    transfer_id: number;
+    id_cloth: string | null;
+    id_material: string | null;
+    name: string;
+    quantity: string;
+    price: string;
+    small: string;
+    medium: string;
+    large: string;
+    xlarge: string;
+    xxlarge: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Transfer {
+    id: number;
+    description: string;
+    order_value: number | null;
+    created_at: string;
+    updated_at: string;
+    transfer_items: TransferItem[];
+}

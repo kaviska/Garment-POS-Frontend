@@ -29,7 +29,9 @@ interface Material {
 export default function MaterialList() {
   const [materials, setMaterials] = useState<Material[]>([]);
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [selectedMaterial, setSelectedMaterial] = useState<Material | null>(null);
+  const [selectedMaterial, setSelectedMaterial] = useState<Material | null>(
+    null
+  );
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [materialModelOpen, setMaterialModelOpen] = useState(false);
   const [toast, setToast] = useState<{
@@ -210,6 +212,8 @@ export default function MaterialList() {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            Authorization:
+              "Bearer 3|85MPD3fuiEGXIJYlvgV0PCOhLPVEzLL2JBBJl349f9ff23f6",
           },
         }
       );
@@ -256,7 +260,10 @@ export default function MaterialList() {
           data={materials}
           fields={[
             { label: "Name", value: selectedMaterial?.name || "N/A" },
-            { label: "Description", value: selectedMaterial?.description || "N/A" },
+            {
+              label: "Description",
+              value: selectedMaterial?.description || "N/A",
+            },
             { label: "Type", value: selectedMaterial?.type || "N/A" },
             { label: "Unit", value: selectedMaterial?.unit || "N/A" },
             { label: "Cost", value: selectedMaterial?.cost || "N/A" },

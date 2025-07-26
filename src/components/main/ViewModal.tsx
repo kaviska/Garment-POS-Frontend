@@ -19,9 +19,16 @@ interface ViewModalProps<T> {
   data?: T;
   fields: Field[];
   onClose: () => void;
+  customContent?: React.ReactNode;
 }
 
-export default function ViewModal<T>({ title, data, fields, onClose }: ViewModalProps<T>) {
+export default function ViewModal<T>({
+  title,
+  data,
+  fields,
+  onClose,
+  customContent,
+}: ViewModalProps<T>) {
   return (
     <Dialog onClose={onClose} open={true}>
       <DialogTitle>
@@ -42,11 +49,15 @@ export default function ViewModal<T>({ title, data, fields, onClose }: ViewModal
             value={field.value || "N/A"}
             fullWidth
             margin="normal"
-            
             InputProps={{ style: { height: "50px", fontSize: "14px" } }}
             InputLabelProps={{ style: { fontSize: "14px" } }}
           />
         ))}
+        {customContent && (
+          <div className="mt-4">
+            {customContent}
+          </div>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Close</Button>

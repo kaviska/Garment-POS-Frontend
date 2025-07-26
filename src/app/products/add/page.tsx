@@ -4,11 +4,9 @@ import { useState, useEffect } from "react";
 import ToastMessage from "@/components/dashboard/ToastMessage";
 import FormGenerator from "@/components/main/FormGenerator";
 import { AlertColor } from "@mui/material";
-import { SelectChangeEvent } from "@mui/material/Select";
 import BrandAdd from "@/components/AddModels/BrandAdd"; // Import Brand Add modal
 import CategoryAdd from "@/components/AddModels/CategoryAdd"; // Import Category Add modal
 import AddIcon from "@mui/icons-material/Add";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 interface FormData {
   name: string;
@@ -17,8 +15,6 @@ interface FormData {
   category_id: string;
   brand_id: string;
   primary_image: File | null;
-  type: string;
-  web_availability: string;
 }
 
 // Function to generate slug
@@ -37,9 +33,7 @@ export default function Add() {
     description: "",
     category_id: "",
     brand_id: "",
-    type: "variant",
     primary_image: null,
-    web_availability: "true",
   });
 
   const [toast, setToast] = useState<{
@@ -117,7 +111,7 @@ export default function Add() {
       | React.ChangeEvent<
           HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
         >
-      | SelectChangeEvent
+      | { target: { name: string; value: string } }
   ) => {
     const { name, value } = e.target as
       | HTMLInputElement
@@ -171,8 +165,8 @@ export default function Add() {
       formDataToSend.append("description", formData.description);
       formDataToSend.append("category_id", formData.category_id);
       formDataToSend.append("brand_id", formData.brand_id);
-      formDataToSend.append("type", formData.type);
-      formDataToSend.append("web_availability", formData.web_availability);
+      formDataToSend.append("type", "variant"); // Always send "variant"
+      formDataToSend.append("web_availability", "true"); // Always send "true"
       if (formData.primary_image) {
         formDataToSend.append("primary_image", formData.primary_image);
       }
@@ -203,8 +197,6 @@ export default function Add() {
           category_id: "",
           brand_id: "",
           primary_image: null,
-          type: "fixed",
-          web_availability: "true",
         });
       } else {
         const errorData = await response.json();
@@ -253,8 +245,8 @@ export default function Add() {
       formDataToSend.append("description", formData.description);
       formDataToSend.append("category_id", formData.category_id);
       formDataToSend.append("brand_id", formData.brand_id);
-      formDataToSend.append("type", formData.type);
-      formDataToSend.append("web_availability", formData.web_availability);
+      formDataToSend.append("type", "variant"); // Always send "variant"
+      formDataToSend.append("web_availability", "true"); // Always send "true"
       if (formData.primary_image) {
         formDataToSend.append("primary_image", formData.primary_image);
       }
@@ -299,8 +291,6 @@ export default function Add() {
           category_id: "",
           brand_id: "",
           primary_image: null,
-          type: "variant",
-          web_availability: "true",
         });
       } else {
         const errorData = await response.json();
@@ -359,43 +349,6 @@ export default function Add() {
               endPoint={field.endPoint}
             />
           ))}
-
-          <FormControl>
-            {/* add new selctor call type add two type as variant and fixed default fixed */}
-            <InputLabel id="type-label">Type</InputLabel>
-            <Select
-              labelId="type-label"
-              id="type-select"
-              value={formData.type || ""}
-              name="type"
-              label="Type"
-              onChange={handleChange}
-              sx={{ minWidth: 120, height: 50, fontSize: 14 }}
-            >
-              <MenuItem value="variant">variant</MenuItem>
-
-              <MenuItem value="fixed">Fixed(For item Which has kg)</MenuItem>
-            </Select>
-          </FormControl>
-
-          <FormControl>
-            {/* add new selctor call type add two type as variant and fixed default fixed */}
-            <InputLabel id="web_availability-label">
-              Web Availability
-            </InputLabel>
-            <Select
-              labelId="web_availability-label"
-              id="web_availability-select"
-              value={formData.web_availability || ""}
-              name="web_availability"
-              label="Web Availability"
-              onChange={handleChange}
-              sx={{ minWidth: 120, height: 50, fontSize: 14 }}
-            >
-              <MenuItem value="true">True</MenuItem>
-              <MenuItem value="false">False</MenuItem>
-            </Select>
-          </FormControl>
         </div>
         <div className="mt-5 flex gap-3">
           <button

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createTheme } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -11,25 +11,24 @@ import LayersIcon from "@mui/icons-material/Layers";
 import { NextAppProvider } from "@toolpad/core/nextjs";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import BellIcon from "@mui/icons-material/Notifications";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import AddIcon from '@mui/icons-material/Add';
-import EngineeringIcon from '@mui/icons-material/Engineering';
-import Inventory2Icon from '@mui/icons-material/Inventory2';
-import MoneyIcon from '@mui/icons-material/Money';
-import PrintIcon from '@mui/icons-material/Print';
-import { usePathname } from 'next/navigation';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import AddIcon from "@mui/icons-material/Add";
+import EngineeringIcon from "@mui/icons-material/Engineering";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import MoneyIcon from "@mui/icons-material/Money";
+import PrintIcon from "@mui/icons-material/Print";
+import { usePathname } from "next/navigation";
 import { Suspense } from "react";
-import CategoryIcon from '@mui/icons-material/Category';
-import RedditIcon from '@mui/icons-material/Reddit';
-import LinkIcon from '@mui/icons-material/Link';
-import QueueIcon from '@mui/icons-material/Queue';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import LogoutIcon from '@mui/icons-material/Logout';
+import CategoryIcon from "@mui/icons-material/Category";
+import RedditIcon from "@mui/icons-material/Reddit";
+import LinkIcon from "@mui/icons-material/Link";
+import QueueIcon from "@mui/icons-material/Queue";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import LogoutIcon from "@mui/icons-material/Logout";
 import CircularProgress from "@mui/material/CircularProgress";
 import Badge from "@mui/material/Badge";
 
-
-import './globals.css'
+import "./globals.css";
 import { Segment } from "@mui/icons-material";
 
 // Define the theme
@@ -41,18 +40,16 @@ const demoTheme = createTheme({
 });
 const posRedirecter = () => {
   window.location.href = "/pos";
-}
-
+};
 
 function TopNav() {
- 
   // Fetch pending order count
- 
+
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       const user = localStorage.getItem("admin-users");
       const token = localStorage.getItem("admin-token");
-  
+
       if (!user || !token) {
         window.location.href = "/login";
       }
@@ -63,13 +60,16 @@ function TopNav() {
 
   const fetchNotificationCount = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/reports/alert-table`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/reports/alert-table`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch notifications");
@@ -82,17 +82,19 @@ function TopNav() {
     } finally {
       setLoading(false);
     }
-  }
+  };
   useEffect(() => {
     fetchNotificationCount();
   }, []);
 
+  const TranferRedirector = () => {
+    window.location.href = "/transfer";
+  };
+
   return (
     <div className="flex items-center gap-5 mr-20 my-10">
-      
       {loading ? (
-                 <BellIcon color="action" />
-
+        <BellIcon color="action" />
       ) : (
         <Badge badgeContent={notificationCount} color="primary">
           <BellIcon
@@ -104,20 +106,29 @@ function TopNav() {
           />
         </Badge>
       )}
-        <LogoutIcon
-          onClick={() => {
-            if (typeof window !== "undefined") {
-          localStorage.removeItem("admin-users");
-          localStorage.removeItem("admin-token");
-          window.location.href = "/login";
-            }
-          }}
-          className="cursor-pointer "
-            color="error" // Red color for logout icon
-        />
-      
-      <button onClick={posRedirecter} className="md:rounded-[20px] cursor-pointer md:border md:border-[#53B175] md:x-6 md:py-3 md:w-[80px]">
+      <LogoutIcon
+        onClick={() => {
+          if (typeof window !== "undefined") {
+            localStorage.removeItem("admin-users");
+            localStorage.removeItem("admin-token");
+            window.location.href = "/login";
+          }
+        }}
+        className="cursor-pointer "
+        color="error" // Red color for logout icon
+      />
+
+      <button
+        onClick={posRedirecter}
+        className="md:rounded-[20px] cursor-pointer md:border md:border-[#53B175] md:x-6 md:py-3 md:w-[80px]"
+      >
         POS
+      </button>
+      <button
+        onClick={TranferRedirector}
+        className="md:rounded-[20px] cursor-pointer md:border md:border-[#53B175] md:x-6 md:py-3 md:w-[80px]"
+      >
+        Transer
       </button>
       <div className="md:flex hidden items-center gap-3 ">
         <img
@@ -125,11 +136,13 @@ function TopNav() {
           alt="user-image"
           className="rounded-full w-[40px] h-[40px]"
         />
-         <span>
-    {typeof window !== "undefined" && localStorage.getItem("admin-users")
-      ? JSON.parse(localStorage.getItem("admin-users") || "{}").name.split(" ")[0]
-      : "Admin"}
-  </span>
+        <span>
+          {typeof window !== "undefined" && localStorage.getItem("admin-users")
+            ? JSON.parse(
+                localStorage.getItem("admin-users") || "{}"
+              ).name.split(" ")[0]
+            : "Admin"}
+        </span>
       </div>
     </div>
   );
@@ -153,8 +166,6 @@ function TopNav() {
 //   }
 // }
 
-
-
 // Main dashboard component
 export default function RootLayout({
   children,
@@ -171,15 +182,14 @@ export default function RootLayout({
       const token = localStorage.getItem("admin-token");
 
       if (!user || !token) {
-       
       } else {
         const parsedUser = JSON.parse(user);
         const cashierNames = ["cashier", "cashier-1", "cashier-2", "cashier-3"];
         setCashier(
           typeof parsedUser.name === "string" &&
-          cashierNames.some(
-            (name) => parsedUser.name.toLowerCase() === name.toLowerCase()
-          )
+            cashierNames.some(
+              (name) => parsedUser.name.toLowerCase() === name.toLowerCase()
+            )
         );
       }
     }
@@ -203,7 +213,9 @@ export default function RootLayout({
       }
 
       const data = await response.json();
-      const count = data.data.filter((order: any) => order.type !== "pos").length;
+      const count = data.data.filter(
+        (order: any) => order.type !== "pos"
+      ).length;
       setPendingOrderCount(count); // Count the number of pending orders excluding type "pos"
     } catch (error) {
       console.error("Error fetching pending order count:", error);
@@ -217,43 +229,40 @@ export default function RootLayout({
   const NAVIGATION = cashier
     ? [
         { kind: "header", title: "Main items" },
-        {
-          segment: "orders",
-          title: (
-            <span>
-              Orders{" "}
-              <span style={{ color: "red" }}>({pendingOrderCount})</span>
-            </span>
-          ), // Display pending order count in red
-          icon: <ShoppingCartIcon onClick={() => setSelectedPage("orders")} />,
-          children: [
-            {
-              segment: "all",
-              title: "All Orders",
-              icon: (
-                <VisibilityIcon onClick={() => setSelectedPage("orders/all")} />
-              ),
-            },
-            {
-              segment: "pending",
-              title: "Pending Order",
-              icon: (
-                <AddIcon onClick={() => setSelectedPage("orders/pending")} />
-              ),
-            },
-          ],
-        },
+        // {
+        //   segment: "orders",
+        //   title: (
+        //     <span>
+        //       Orders{" "}
+        //       <span style={{ color: "red" }}>({pendingOrderCount})</span>
+        //     </span>
+        //   ), // Display pending order count in red
+        //   icon: <ShoppingCartIcon onClick={() => setSelectedPage("orders")} />,
+        //   children: [
+        //     {
+        //       segment: "all",
+        //       title: "All Orders",
+        //       icon: (
+        //         <VisibilityIcon onClick={() => setSelectedPage("orders/all")} />
+        //       ),
+        //     },
+        //     {
+        //       segment: "pending",
+        //       title: "Pending Order",
+        //       icon: (
+        //         <AddIcon onClick={() => setSelectedPage("orders/pending")} />
+        //       ),
+        //     },
+        //   ],
+        // },
 
-         { kind: "divider" },
+        { kind: "divider" },
         { kind: "header", title: "HRM" },
         {
           segment: "hrm",
           title: "HRM",
-          icon: (
-            <EngineeringIcon onClick={() => setSelectedPage("employee")} />
-          ),
+          icon: <EngineeringIcon onClick={() => setSelectedPage("employee")} />,
           children: [
-           
             {
               segment: "attendence",
               title: "Attendance",
@@ -263,8 +272,6 @@ export default function RootLayout({
                 />
               ),
             },
-          
-           
           ],
         },
       ]
@@ -275,41 +282,39 @@ export default function RootLayout({
           title: "Dashboard",
           icon: <DashboardIcon onClick={() => setSelectedPage("dashboard")} />,
         },
-        {
-          segment: "orders",
-          title: (
-            <span>
-              Orders{" "}
-              <span style={{ color: "red" }}>({pendingOrderCount})</span>
-            </span>
-          ), // Display pending order count in red
-          icon: <ShoppingCartIcon onClick={() => setSelectedPage("orders")} />,
-          children: [
-            {
-              segment: "all",
-              title: "All Orders",
-              icon: (
-                <VisibilityIcon onClick={() => setSelectedPage("orders/all")} />
-              ),
-            },
-            {
-              segment: "pending",
-              title: "Pending Order",
-              icon: (
-                <AddIcon onClick={() => setSelectedPage("orders/pending")} />
-              ),
-            },
-          ],
-        },
+        // {
+        //   segment: "orders",
+        //   title: (
+        //     <span>
+        //       Orders{" "}
+        //       <span style={{ color: "red" }}>({pendingOrderCount})</span>
+        //     </span>
+        //   ), // Display pending order count in red
+        //   icon: <ShoppingCartIcon onClick={() => setSelectedPage("orders")} />,
+        //   children: [
+        //     {
+        //       segment: "all",
+        //       title: "All Orders",
+        //       icon: (
+        //         <VisibilityIcon onClick={() => setSelectedPage("orders/all")} />
+        //       ),
+        //     },
+        //     {
+        //       segment: "pending",
+        //       title: "Pending Order",
+        //       icon: (
+        //         <AddIcon onClick={() => setSelectedPage("orders/pending")} />
+        //       ),
+        //     },
+        //   ],
+        // },
 
-         { kind: "divider" },
+        { kind: "divider" },
         { kind: "header", title: "HRM" },
         {
           segment: "hrm",
           title: "HRM",
-          icon: (
-            <EngineeringIcon onClick={() => setSelectedPage("employee")} />
-          ),
+          icon: <EngineeringIcon onClick={() => setSelectedPage("employee")} />,
           children: [
             {
               segment: "employee",
@@ -350,7 +355,7 @@ export default function RootLayout({
           ],
         },
 
-          { kind: "divider" },
+        { kind: "divider" },
         { kind: "header", title: "Analytics" },
 
         {
@@ -362,7 +367,9 @@ export default function RootLayout({
               segment: "sales",
               title: "Sales",
               icon: (
-                <BarChartIcon onClick={() => setSelectedPage("reports/sales")} />
+                <BarChartIcon
+                  onClick={() => setSelectedPage("reports/sales")}
+                />
               ),
             },
             {
@@ -378,14 +385,33 @@ export default function RootLayout({
               segment: "stocks",
               title: "Stocks",
               icon: (
-                <BarChartIcon onClick={() => setSelectedPage("reports/stocks")} />
+                <BarChartIcon
+                  onClick={() => setSelectedPage("reports/stocks")}
+                />
               ),
             },
-          
-            
           ],
         },
 
+        //transfer
+        // { kind: "divider" },
+        // { kind: "header", title: "Transfer" },
+        // {
+        //   segment: "transfer",
+        //   title: "Transfer",
+        //   icon: <VisibilityIcon />,
+        //   children: [
+        //     {
+        //       segment: "transfer",
+        //       title: "Transfer",
+        //       icon: (
+        //         <VisibilityIcon
+        //           onClick={() => setSelectedPage("transfer/list")}
+        //         />
+        //       ),
+        //     },
+        //   ],
+        // },
 
         { kind: "header", title: "Products" },
         { kind: "divider" },
@@ -397,9 +423,7 @@ export default function RootLayout({
             {
               segment: "add",
               title: "Add Product",
-              icon: (
-                <AddIcon onClick={() => setSelectedPage("products/add")} />
-              ),
+              icon: <AddIcon onClick={() => setSelectedPage("products/add")} />,
             },
             {
               segment: "list",
@@ -429,13 +453,17 @@ export default function RootLayout({
             {
               segment: "add",
               title: "Add Material",
-              icon: <AddIcon onClick={() => setSelectedPage("materials/add")} />,
+              icon: (
+                <AddIcon onClick={() => setSelectedPage("materials/add")} />
+              ),
             },
             {
               segment: "list",
               title: "List Materials",
               icon: (
-                <VisibilityIcon onClick={() => setSelectedPage("materials/list")} />
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("materials/list")}
+                />
               ),
             },
           ],
@@ -490,7 +518,9 @@ export default function RootLayout({
         {
           segment: "variationOptions",
           title: "Variation Options",
-          icon: <QueueIcon onClick={() => setSelectedPage("variationOptions")} />,
+          icon: (
+            <QueueIcon onClick={() => setSelectedPage("variationOptions")} />
+          ),
           children: [
             {
               segment: "add",
@@ -527,7 +557,9 @@ export default function RootLayout({
               segment: "list",
               title: "List Brands",
               icon: (
-                <VisibilityIcon onClick={() => setSelectedPage("brands/list")} />
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("brands/list")}
+                />
               ),
             },
           ],
@@ -618,7 +650,9 @@ export default function RootLayout({
               segment: "list",
               title: "List Admins",
               icon: (
-                <VisibilityIcon onClick={() => setSelectedPage("admins/list")} />
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("admins/list")}
+                />
               ),
             },
           ],
@@ -626,9 +660,7 @@ export default function RootLayout({
         {
           segment: "customers",
           title: "Customers",
-          icon: (
-            <EngineeringIcon onClick={() => setSelectedPage("admins")} />
-          ),
+          icon: <EngineeringIcon onClick={() => setSelectedPage("admins")} />,
           children: [
             {
               segment: "list",
@@ -641,48 +673,48 @@ export default function RootLayout({
             },
           ],
         },
-
-      
-       
       ];
 
   const pathname = usePathname();
-    const isPos= pathname.includes("pos");
-    const islogin= pathname.includes("login");
-    const isfrogotPassword= pathname.includes("frogot-password");
-    const transfer= pathname.includes("transfer");
+  const isPos = pathname.includes("pos");
+  const islogin = pathname.includes("login");
+  const isTransfer = pathname.includes("transfer");
+  const isfrogotPassword = pathname.includes("frogot-password");
 
-  
-  
   return (
     <html lang="en">
       <body>
-      <Suspense fallback={<div>Loading...</div>}>
-    {!isPos && !isfrogotPassword && !islogin  && !transfer ? (
-      
-      <NextAppProvider
-        navigation={NAVIGATION as any} // Temporarily cast to 'any' if type mismatch persists
-        branding={{
-          logo: <img src="/logo.png" alt="MUI logo" className="md:block hidden" />,
-          title: "IYMart",
-          homeUrl: "/dashboard",
-        }}
-        theme={demoTheme}
-      >
-        <DashboardLayout
-          slots={{
-            toolbarAccount: TopNav,
-          }}
-          sx={{ ".MuiStack-root": { padding: "0px 10px" } }}
-        >
-          <div className="p-10">{children}</div>
-        </DashboardLayout>
-      </NextAppProvider>
-    ) : (
-      <>{children}</>
-    )}
-   </Suspense>
-    </body>
+        <Suspense fallback={<div>Loading...</div>}>
+          {!isPos && !isfrogotPassword && !islogin && !isTransfer ? (
+            <NextAppProvider
+              navigation={NAVIGATION as any} // Temporarily cast to 'any' if type mismatch persists
+              branding={{
+                logo: (
+                  <img
+                    src="/logo.png"
+                    alt="MUI logo"
+                    className="md:block hidden"
+                  />
+                ),
+                title: "IYMart",
+                homeUrl: "/dashboard",
+              }}
+              theme={demoTheme}
+            >
+              <DashboardLayout
+                slots={{
+                  toolbarAccount: TopNav,
+                }}
+                sx={{ ".MuiStack-root": { padding: "0px 10px" } }}
+              >
+                <div className="p-10">{children}</div>
+              </DashboardLayout>
+            </NextAppProvider>
+          ) : (
+            <>{children}</>
+          )}
+        </Suspense>
+      </body>
     </html>
   );
 }
