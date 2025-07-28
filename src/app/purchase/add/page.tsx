@@ -209,9 +209,10 @@ const [formData, setFormData] = useState<FormData>({
       if (
         !formData.product_id ||
         !formData.quantity ||
-        !formData.web_price ||
+       
         !formData.pos_price ||
-        !formData.web_discount ||
+        
+        
         !formData.pos_discount ||
         !formData.supplier_id ||
         !formData.cost

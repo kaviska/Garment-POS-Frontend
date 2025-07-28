@@ -224,9 +224,9 @@ export default function PurchaseUpdate({
       formDataToSend.append("id", String(formData.id));
       formDataToSend.append("product_id", String(formData.product_id));
       formDataToSend.append("quantity", String(formData.quantity));
-      formDataToSend.append("web_price", String(formData.web_price));
+      formDataToSend.append("web_price", String(100));
       formDataToSend.append("pos_price", String(formData.pos_price));
-      formDataToSend.append("web_discount", String(formData.web_discount));
+      formDataToSend.append("web_discount", String(10));
       formDataToSend.append("pos_discount", String(formData.pos_discount));
       formDataToSend.append("supplier_id", String(formData.supplier_id));
       formDataToSend.append("cost", String(formData.cost));
@@ -293,17 +293,12 @@ export default function PurchaseUpdate({
       endPoint: "products?all-products=true",
     },
     { name: "quantity", label: "Quantity", type: "text", field: "text" },
-    { name: "web_price", label: "Web Price", type: "text", field: "text" },
-    { name: "pos_price", label: "POS Price", type: "text", field: "text" },
-    {
-      name: "web_discount",
-      label: "Web Discount",
-      type: "text",
-      field: "text",
-    },
+   
+    { name: "pos_price", label: "Price", type: "text", field: "text" },
+   
     {
       name: "pos_discount",
-      label: "POS Discount",
+      label: "Discount",
       type: "text",
       field: "text",
     },

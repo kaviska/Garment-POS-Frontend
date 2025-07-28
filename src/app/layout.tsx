@@ -412,44 +412,6 @@ export default function RootLayout({
           ],
         },
 
-        { kind: "divider" },
-        { kind: "header", title: "Analytics" },
-
-        {
-          segment: "reports",
-          title: "Reports",
-          icon: <BarChartIcon />,
-          children: [
-            {
-              segment: "sales",
-              title: "Sales",
-              icon: (
-                <BarChartIcon
-                  onClick={() => setSelectedPage("reports/sales")}
-                />
-              ),
-            },
-            {
-              segment: "products",
-              title: "Products",
-              icon: (
-                <BarChartIcon
-                  onClick={() => setSelectedPage("reports/products")}
-                />
-              ),
-            },
-            {
-              segment: "stocks",
-              title: "Stocks",
-              icon: (
-                <BarChartIcon
-                  onClick={() => setSelectedPage("reports/stocks")}
-                />
-              ),
-            },
-          ],
-        },
-
         {
           segment: "materials",
           title: "Purchase Materials",
@@ -593,6 +555,46 @@ export default function RootLayout({
         },
 
 
+
+        { kind: "divider" },
+        { kind: "header", title: "Analytics" },
+
+        {
+          segment: "reports",
+          title: "Reports",
+          icon: <BarChartIcon />,
+          children: [
+            {
+              segment: "sales",
+              title: "Sales",
+              icon: (
+                <BarChartIcon
+                  onClick={() => setSelectedPage("reports/sales")}
+                />
+              ),
+            },
+            {
+              segment: "products",
+              title: "Products",
+              icon: (
+                <BarChartIcon
+                  onClick={() => setSelectedPage("reports/products")}
+                />
+              ),
+            },
+            {
+              segment: "stocks",
+              title: "Stocks",
+              icon: (
+                <BarChartIcon
+                  onClick={() => setSelectedPage("reports/stocks")}
+                />
+              ),
+            },
+          ],
+        },
+
+       
         { kind: "divider" },
         { kind: "header", title: "Sales" },
         {
