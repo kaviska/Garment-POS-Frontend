@@ -125,23 +125,15 @@ export default function List() {
       selector: (row: Purchase) => row.quantity?.toString() || "N/A",
       sortable: true,
     },
+   
     {
-      name: "Web Price",
-      selector: (row: Purchase) => `LKR${row.web_price?.toFixed(2) || "0.00"}`,
-      sortable: true,
-    },
-    {
-      name: "POS Price",
+      name: "Price",
       selector: (row: Purchase) => `LKR${row.pos_price?.toFixed(2) || "0.00"}`,
       sortable: true,
     },
+   
     {
-      name: "Web Discount",
-      selector: (row: Purchase) => `${row.web_discount || "0"}`,
-      sortable: true,
-    },
-    {
-      name: "POS Discount",
+      name: "Discount",
       selector: (row: Purchase) => `${row.pos_discount || "0"}`,
       sortable: true,
     },

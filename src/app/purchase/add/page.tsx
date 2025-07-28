@@ -228,9 +228,9 @@ const [formData, setFormData] = useState<FormData>({
       const formDataToSend = new FormData();
       formDataToSend.append("product_id", formData.product_id);
       formDataToSend.append("quantity", formData.quantity);
-      formDataToSend.append("web_price", formData.web_price);
+      formDataToSend.append("web_price", '100');
       formDataToSend.append("pos_price", formData.pos_price);
-      formDataToSend.append("web_discount", formData.web_discount);
+      formDataToSend.append("web_discount", '10');
       formDataToSend.append("pos_discount", formData.pos_discount);
       formDataToSend.append("supplier_id", formData.supplier_id);
       formDataToSend.append("cost", formData.cost);
@@ -314,17 +314,12 @@ const [formData, setFormData] = useState<FormData>({
           },
         ]),
     { name: "quantity", label: "Quantity", type: "number", field: "number" },
-    { name: "web_price", label: "Web Price", type: "number", field: "number" },
-    { name: "pos_price", label: "POS Price", type: "number", field: "number" },
-    {
-      name: "web_discount",
-      label: "Web Discount",
-      type: "number",
-      field: "number",
-    },
+  
+    { name: "pos_price", label: "Price", type: "number", field: "number" },
+   
     {
       name: "pos_discount",
-      label: "POS Discount",
+      label: "Discount",
       type: "number",
       field: "number",
     },
