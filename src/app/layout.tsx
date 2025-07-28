@@ -310,45 +310,102 @@ export default function RootLayout({
         // },
 
         { kind: "divider" },
-        { kind: "header", title: "HRM" },
+        { kind: "header", title: "People" },
         {
-          segment: "hrm",
-          title: "HRM",
-          icon: <EngineeringIcon onClick={() => setSelectedPage("employee")} />,
+          segment: "suppliers",
+          title: "Suppliers (Factories)",
+          icon: (
+            <EngineeringIcon onClick={() => setSelectedPage("suppliers")} />
+          ),
           children: [
             {
-              segment: "employee",
-              title: "Employees",
+              segment: "add",
+              title: "Add Supplier",
+              icon: (
+                <AddIcon onClick={() => setSelectedPage("suppliers/add")} />
+              ),
+            },
+            {
+              segment: "list",
+              title: "List Suppliers",
               icon: (
                 <VisibilityIcon
-                  onClick={() => setSelectedPage("hrm/employee")}
+                  onClick={() => setSelectedPage("suppliers/list")}
+                />
+              ),
+            },
+          ],
+        },
+
+        { kind: "divider" },
+        { kind: "header", title: "Admin" },
+        {
+          segment: "admins",
+          title: "Admins",
+          icon: (
+            <AdminPanelSettingsIcon onClick={() => setSelectedPage("admins")} />
+          ),
+          children: [
+            {
+              segment: "add",
+              title: "Add Admin",
+              icon: <AddIcon onClick={() => setSelectedPage("admins/add")} />,
+            },
+            {
+              segment: "list",
+              title: "List Admins",
+              icon: (
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("admins/list")}
+                />
+              ),
+            },
+          ],
+        },
+        {
+          segment: "customers",
+          title: "Customers",
+          icon: <EngineeringIcon onClick={() => setSelectedPage("admins")} />,
+          children: [
+            {
+              segment: "list",
+              title: "List Customers",
+              icon: (
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("customer/list")}
+                />
+              ),
+            },
+          ],
+        },
+
+        { kind: "header", title: "Products" },
+        { kind: "divider" },
+        {
+          segment: "products",
+          title: "Products",
+          icon: <Inventory2Icon />,
+          children: [
+            {
+              segment: "add",
+              title: "Add Product",
+              icon: <AddIcon onClick={() => setSelectedPage("products/add")} />,
+            },
+            {
+              segment: "list",
+              title: "List Products",
+              icon: (
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("products/list")}
                 />
               ),
             },
             {
-              segment: "attendence",
-              title: "Attendance",
+              segment: "printLabel",
+              title: "Print Label",
               icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("hrm/attendence")}
-                />
-              ),
-            },
-            {
-              segment: "payroll",
-              title: "Payroll",
-              icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("hrm/payroll")}
-                />
-              ),
-            },
-            {
-              segment: "dilivery",
-              title: "Delivery",
-              icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("hrm/dilivery")}
+                <PrintIcon
+                  onClick={() => setSelectedPage("products/printLabel")}
                 />
               ),
             },
@@ -393,58 +450,6 @@ export default function RootLayout({
           ],
         },
 
-        //transfer
-        // { kind: "divider" },
-        // { kind: "header", title: "Transfer" },
-        // {
-        //   segment: "transfer",
-        //   title: "Transfer",
-        //   icon: <VisibilityIcon />,
-        //   children: [
-        //     {
-        //       segment: "transfer",
-        //       title: "Transfer",
-        //       icon: (
-        //         <VisibilityIcon
-        //           onClick={() => setSelectedPage("transfer/list")}
-        //         />
-        //       ),
-        //     },
-        //   ],
-        // },
-
-        { kind: "header", title: "Products" },
-        { kind: "divider" },
-        {
-          segment: "products",
-          title: "Products",
-          icon: <Inventory2Icon />,
-          children: [
-            {
-              segment: "add",
-              title: "Add Product",
-              icon: <AddIcon onClick={() => setSelectedPage("products/add")} />,
-            },
-            {
-              segment: "list",
-              title: "List Products",
-              icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("products/list")}
-                />
-              ),
-            },
-            {
-              segment: "printLabel",
-              title: "Print Label",
-              icon: (
-                <PrintIcon
-                  onClick={() => setSelectedPage("products/printLabel")}
-                />
-              ),
-            },
-          ],
-        },
         {
           segment: "materials",
           title: "Materials",
@@ -587,6 +592,7 @@ export default function RootLayout({
           ],
         },
 
+
         { kind: "divider" },
         { kind: "header", title: "Sales" },
         {
@@ -604,75 +610,83 @@ export default function RootLayout({
           ],
         },
 
+       
+
+       
+
+
         { kind: "divider" },
-        { kind: "header", title: "People" },
+        { kind: "header", title: "HRM" },
         {
-          segment: "suppliers",
-          title: "Suppliers",
-          icon: (
-            <EngineeringIcon onClick={() => setSelectedPage("suppliers")} />
-          ),
+          segment: "hrm",
+          title: "HRM",
+          icon: <EngineeringIcon onClick={() => setSelectedPage("employee")} />,
           children: [
             {
-              segment: "add",
-              title: "Add Supplier",
+              segment: "employee",
+              title: "Employees",
               icon: (
-                <AddIcon onClick={() => setSelectedPage("suppliers/add")} />
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("hrm/employee")}
+                />
               ),
             },
             {
-              segment: "list",
-              title: "List Suppliers",
+              segment: "attendence",
+              title: "Attendance",
               icon: (
                 <VisibilityIcon
-                  onClick={() => setSelectedPage("suppliers/list")}
+                  onClick={() => setSelectedPage("hrm/attendence")}
+                />
+              ),
+            },
+            {
+              segment: "payroll",
+              title: "Payroll",
+              icon: (
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("hrm/payroll")}
+                />
+              ),
+            },
+            {
+              segment: "dilivery",
+              title: "Delivery",
+              icon: (
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("hrm/dilivery")}
                 />
               ),
             },
           ],
         },
 
-        { kind: "divider" },
-        { kind: "header", title: "Admin" },
-        {
-          segment: "admins",
-          title: "Admins",
-          icon: (
-            <AdminPanelSettingsIcon onClick={() => setSelectedPage("admins")} />
-          ),
-          children: [
-            {
-              segment: "add",
-              title: "Add Admin",
-              icon: <AddIcon onClick={() => setSelectedPage("admins/add")} />,
-            },
-            {
-              segment: "list",
-              title: "List Admins",
-              icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("admins/list")}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          segment: "customers",
-          title: "Customers",
-          icon: <EngineeringIcon onClick={() => setSelectedPage("admins")} />,
-          children: [
-            {
-              segment: "list",
-              title: "List Customers",
-              icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("customer/list")}
-                />
-              ),
-            },
-          ],
-        },
+      
+        //transfer
+        // { kind: "divider" },
+        // { kind: "header", title: "Transfer" },
+        // {
+        //   segment: "transfer",
+        //   title: "Transfer",
+        //   icon: <VisibilityIcon />,
+        //   children: [
+        //     {
+        //       segment: "transfer",
+        //       title: "Transfer",
+        //       icon: (
+        //         <VisibilityIcon
+        //           onClick={() => setSelectedPage("transfer/list")}
+        //         />
+        //       ),
+        //     },
+        //   ],
+        // },
+
+        
+       
+      
+
+        
       ];
 
   const pathname = usePathname();

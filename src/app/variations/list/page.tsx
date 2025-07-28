@@ -3,7 +3,7 @@ import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
 import { useEffect, useState } from "react";
 import type { Variation } from "@/types/type";
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ViewModal from "@/components/main/ViewModal";
@@ -15,7 +15,9 @@ import ToastMessage from "@/components/dashboard/ToastMessage";
 export default function ViewVariation() {
   const [variations, setVariations] = useState<Variation[]>([]);
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [selectedVariation, setSelectedVariation] = useState<Variation | null>(null);
+  const [selectedVariation, setSelectedVariation] = useState<Variation | null>(
+    null
+  );
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [variationModelOpen, setVariationModelOpen] = useState(false);
   const [toast, setToast] = useState<{
@@ -45,7 +47,7 @@ export default function ViewVariation() {
               setVariationModelOpen(true);
             }}
           >
-            <UpdateIcon fontSize="small" color="primary" />
+            <EditIcon fontSize="small" color="primary" />
           </button>
           <button
             className="cursor-pointer"
@@ -72,13 +74,16 @@ export default function ViewVariation() {
 
   const fetchVariations = async () => {
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + "/variations", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_SERVER_URL + "/variations",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch variations");
@@ -122,9 +127,7 @@ export default function ViewVariation() {
           onClose={() => setViewModalOpen(false)}
           title="Variation Details"
           data={variations}
-          fields={[
-            { label: "Name", value: selectedVariation?.name || "N/A" },
-          ]}
+          fields={[{ label: "Name", value: selectedVariation?.name || "N/A" }]}
         />
       )}
 

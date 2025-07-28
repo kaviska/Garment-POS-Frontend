@@ -15,7 +15,7 @@ interface ConformPayModelProps {
   data: OrderData | null;
   setUiChange?: React.Dispatch<React.SetStateAction<number>>;
   setLocalDiscounts?: React.Dispatch<Record<number, number>>;
-   uiChnageForPos: number;
+  uiChnageForPos: number;
   setUiChnageForPos: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -34,11 +34,12 @@ export default function ConformPayModel({
   const shipping = data?.payment?.order?.shipping_cost || 0;
   const discount = data?.payment?.order?.total_discount || 0;
 
-    // ...existing code...
-  
+  // ...existing code...
+
   useEffect(() => {
     if (isOpen && totalAmount > 0) {
-      const payable = discount > 0 ? totalAmount + discount + '-'+ discount : totalAmount;
+      const payable =
+        discount > 0 ? totalAmount + discount + "-" + discount : totalAmount;
       fetch("http://localhost:3000/total", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,10 +49,8 @@ export default function ConformPayModel({
       });
     }
   }, [isOpen, totalAmount, discount]);
-  
-  // ...existing code...
 
-  
+  // ...existing code...
 
   const [paymentType, setPaymentType] = useState("cash");
 
@@ -191,8 +190,7 @@ export default function ConformPayModel({
       if (result.status === "success") {
         if (setUiChange) {
           setUiChange((prev: number) => prev + 1); // Trigger UI change
-        setUiChnageForPos((prev) => prev + 1); // Trigger UI change
-
+          setUiChnageForPos((prev) => prev + 1); // Trigger UI change
         }
       } else {
         console.error("Failed to update order status:", result.message);
@@ -260,15 +258,14 @@ export default function ConformPayModel({
 
                 <div className="relative min-h-[120px] border border-green-400 rounded-[8px] flex items-center justify-center bg-green-50 mb-4">
                   <input
-                  type="text"
-                  value={payingAmount}
-                  onChange={handlePayingAmountChange}
-                  className="text-green-700 text-[48px] font-bold text-center bg-transparent border-none outline-none w-full"
-                  style={{ minHeight: "80px" }}
-                 
+                    type="text"
+                    value={payingAmount}
+                    onChange={handlePayingAmountChange}
+                    className="text-green-700 text-[48px] font-bold text-center bg-transparent border-none outline-none w-full"
+                    style={{ minHeight: "80px" }}
                   />
                   <span className="absolute top-2 left-2 text-green-600 text-sm font-medium">
-                  Paying Amount
+                    Paying Amount
                   </span>
                 </div>
 
@@ -287,20 +284,23 @@ export default function ConformPayModel({
                     <tbody>
                       <tr className="border-b">
                         <td className="py-3 font-medium">Order Tax</td>
-                        <td className="py-3 text-right"> ¥ {tax.toFixed(2)}</td>
+                        <td className="py-3 text-right">
+                          {" "}
+                          LKR {tax.toFixed(2)}
+                        </td>
                       </tr>
                       <tr className="border-b">
                         <td className="py-3 font-medium">Discount</td>
                         <td className="py-3 text-right">
                           {" "}
-                          ¥ {discount.toFixed(2)}
+                          LKR {discount.toFixed(2)}
                         </td>
                       </tr>
                       <tr className="border-b">
                         <td className="py-3 font-medium">Shipping</td>
                         <td className="py-3 text-right">
                           {" "}
-                          ¥ {shipping.toFixed(2)}
+                          LKR {shipping.toFixed(2)}
                         </td>
                       </tr>
                       <tr>
@@ -308,7 +308,7 @@ export default function ConformPayModel({
                           Total Payable
                         </td>
                         <td className="py-3 text-right text-lg font-bold text-green-600">
-                          ¥ {totalAmount.toFixed(2)}
+                          LKR {totalAmount.toFixed(2)}
                         </td>
                       </tr>
                     </tbody>

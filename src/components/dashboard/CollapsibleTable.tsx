@@ -187,34 +187,36 @@ function Row({ row }: { row: OrderData }) {
         </TableCell>
         <TableCell>{row.order_number}</TableCell>
         <TableCell>{row.user_email}</TableCell>
-<TableCell>
-  <p
-    className={`inline-block px-2 py-1 rounded text-white text-xs ${
-      row.order_status === "pending"
-        ? "bg-yellow-500"
-        : row.order_status === "processing"
-        ? "bg-blue-500"
-        : row.order_status === "completed"
-        ? "bg-green-500"
-        : row.order_status === "cancelled"
-        ? "bg-gray-500"
-        : row.order_status === "refunded"
-        ? "bg-purple-500"
-        : row.order_status === "failed"
-        ? "bg-red-600"
-        : row.order_status === "on_hold"
-        ? "bg-orange-500"
-        : row.order_status === "delivered"
-        ? "bg-teal-600"
-        : "bg-gray-300"
-    }`}
-  >
-    {row.order_status.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
-  </p>
-</TableCell>
+        <TableCell>
+          <p
+            className={`inline-block px-2 py-1 rounded text-white text-xs ${
+              row.order_status === "pending"
+                ? "bg-yellow-500"
+                : row.order_status === "processing"
+                  ? "bg-blue-500"
+                  : row.order_status === "completed"
+                    ? "bg-green-500"
+                    : row.order_status === "cancelled"
+                      ? "bg-gray-500"
+                      : row.order_status === "refunded"
+                        ? "bg-purple-500"
+                        : row.order_status === "failed"
+                          ? "bg-red-600"
+                          : row.order_status === "on_hold"
+                            ? "bg-orange-500"
+                            : row.order_status === "delivered"
+                              ? "bg-teal-600"
+                              : "bg-gray-300"
+            }`}
+          >
+            {row.order_status
+              .replace(/_/g, " ")
+              .replace(/\b\w/g, (l) => l.toUpperCase())}
+          </p>
+        </TableCell>
 
         <TableCell>{row.payment_method}</TableCell>
-        <TableCell>¥{row.total}</TableCell>
+        <TableCell>LKR{row.total}</TableCell>
         <TableCell>
           <Button variant="outlined" size="small" onClick={handleOpen}>
             View Details
@@ -243,9 +245,9 @@ function Row({ row }: { row: OrderData }) {
                     <TableRow key={index}>
                       <TableCell>{item.product_name}</TableCell>
                       <TableCell>{item.unit_quantity}</TableCell>
-                      <TableCell>¥{item.unit_price}</TableCell>
+                      <TableCell>LKR{item.unit_price}</TableCell>
                       <TableCell>
-                        ¥{item.unit_quantity * item.unit_price}
+                        LKR{item.unit_quantity * item.unit_price}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -311,23 +313,25 @@ function Row({ row }: { row: OrderData }) {
 
               <div>
                 <p className="font-medium">Subtotal:</p>
-                <p>¥{row.subtotal}</p>
+                <p>LKR{row.subtotal}</p>
               </div>
               <div>
                 <p className="font-medium">Tax:</p>
-                <p>¥{row.tax}</p>
+                <p>LKR{row.tax}</p>
               </div>
               <div>
                 <p className="font-medium">Shipping:</p>
-                <p>¥{row.shipping_cost}</p>
+                <p>LKR{row.shipping_cost}</p>
               </div>
               <div>
                 <p className="font-medium">Discount:</p>
-                <p>¥{row.total_discount}</p>
+                <p>LKR{row.total_discount}</p>
               </div>
               <div>
                 <p className="font-medium">Total:</p>
-                <p className="text-lg font-bold text-green-700">¥{row.total}</p>
+                <p className="text-lg font-bold text-green-700">
+                  LKR{row.total}
+                </p>
               </div>
               <div>
                 <p className="font-medium">Payment Status:</p>
@@ -385,7 +389,7 @@ function Row({ row }: { row: OrderData }) {
                   >
                     <span className="font-medium">{item.product_name}</span>
                     <span>
-                      {item.unit_quantity} × ¥{item.unit_price}
+                      {item.unit_quantity} × LKR{item.unit_price}
                     </span>
                   </div>
                 ))}

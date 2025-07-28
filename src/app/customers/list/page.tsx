@@ -3,7 +3,7 @@ import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
 import { useEffect, useState } from "react";
 import type { Customer } from "@/types/type"; // Import the Customer type
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ViewModal from "@/components/main/ViewModal"; // Import the ViewModal component
@@ -14,7 +14,9 @@ import ToastMessage from "@/components/dashboard/ToastMessage"; // Import ToastM
 export default function ViewCustomers() {
   const [customers, setCustomers] = useState<Customer[]>([]); // Use the Customer type here
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null); // State to hold the selected customer
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
+    null
+  ); // State to hold the selected customer
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [toast, setToast] = useState<{
     open: boolean;
@@ -50,7 +52,7 @@ export default function ViewCustomers() {
             className="cursor-pointer"
             onClick={() => console.log("Update clicked")}
           >
-            <UpdateIcon fontSize="small" color="primary" />{" "}
+            <EditIcon fontSize="small" color="primary" />{" "}
             {/* Blue for update */}
           </button>
           <button

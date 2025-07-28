@@ -16,7 +16,6 @@ export default function CategoryAdd({
 }: AddProps) {
   const [formData, setFormData] = useState({
     name: "",
-    slug: "",
     image: null,
   });
 
@@ -32,9 +31,19 @@ export default function CategoryAdd({
 
   const inputFields = [
     { name: "name", label: "Category Name", type: "text", field: "text" },
-    { name: "slug", label: "Category Slug", type: "text", field: "text" },
     { name: "image", label: "Category Image", type: "file", field: "file" },
   ];
+
+  // Function to generate slug from name
+  const generateSlug = (name: string): string => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/[^a-z0-9-]/g, "") // Remove special characters except hyphens
+      .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
+      .replace(/^-|-$/g, ""); // Remove leading/trailing hyphens
+  };
 
   const handleChange = (
     e:
@@ -64,7 +73,7 @@ export default function CategoryAdd({
         severity: "info",
       });
 
-      if (!formData.name || !formData.slug) {
+      if (!formData.name) {
         setToast({
           open: true,
           message: "Please fill all the fields",
@@ -73,20 +82,26 @@ export default function CategoryAdd({
         return;
       }
 
+      // Generate slug from the category name
+      const slug = generateSlug(formData.name);
+
       const formDataToSend = new FormData();
       formDataToSend.append("name", formData.name);
-      formDataToSend.append("slug", formData.slug);
+      formDataToSend.append("slug", slug);
       if (formData.image) {
         formDataToSend.append("image", formData.image);
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/categories`, {
-        method: "POST",
-        body: formDataToSend,
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/categories`,
+        {
+          method: "POST",
+          body: formDataToSend,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         setToast({
@@ -142,7 +157,11 @@ export default function CategoryAdd({
                 name={field.name}
                 label={field.label}
                 type={field.type}
-                value={field.type === "file" ? undefined : formData[field.name as keyof typeof formData]} // Avoid passing File object directly
+                value={
+                  field.type === "file"
+                    ? undefined
+                    : formData[field.name as keyof typeof formData]
+                } // Avoid passing File object directly
                 onChange={handleChange}
               />
             ))}

@@ -26,56 +26,59 @@ interface Order {
 export default function SalesList() {
   const [orders, setOrders] = useState<Order[]>([]);
 
-const columns = [
+  const columns = [
     {
-        name: "Order Number",
-        selector: (row: Order) => row.order_number,
-        sortable: true,
+      name: "Order Number",
+      selector: (row: Order) => row.order_number,
+      sortable: true,
     },
     {
-        name: "Customer Name",
-        selector: (row: Order) => row.user_name,
-        sortable: true,
+      name: "Customer Name",
+      selector: (row: Order) => row.user_name,
+      sortable: true,
     },
     {
-        name: "Email",
-        selector: (row: Order) => row.user_email,
+      name: "Email",
+      selector: (row: Order) => row.user_email,
     },
     {
-        name: "Phone",
-        selector: (row: Order) => row.user_phone,
+      name: "Phone",
+      selector: (row: Order) => row.user_phone,
     },
     {
-        name: "Subtotal",
-        selector: (row: Order) => `¥${row.subtotal.toFixed(2)}`,
+      name: "Subtotal",
+      selector: (row: Order) => `LKR${row.subtotal.toFixed(2)}`,
     },
     {
-        name: "Discount",
-        selector: (row: Order) => `¥${row.total_discount.toFixed(2)}`,
+      name: "Discount",
+      selector: (row: Order) => `LKR${row.total_discount.toFixed(2)}`,
     },
     {
-        name: "Tax",
-        selector: (row: Order) => `¥${row.tax.toFixed(2)}`,
+      name: "Tax",
+      selector: (row: Order) => `LKR${row.tax.toFixed(2)}`,
     },
     {
-        name: "Shipping",
-        selector: (row: Order) => `¥${row.shipping_cost.toFixed(2)}`,
+      name: "Shipping",
+      selector: (row: Order) => `LKR${row.shipping_cost.toFixed(2)}`,
     },
     {
-        name: "Total",
-        selector: (row: Order) => `¥${row.total.toFixed(2)}`,
+      name: "Total",
+      selector: (row: Order) => `LKR${row.total.toFixed(2)}`,
     },
-];
+  ];
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + "/admin/orders", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_SERVER_URL + "/admin/orders",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch orders");
@@ -83,7 +86,9 @@ const columns = [
 
       const result = await response.json();
       if (result.status === "success") {
-        const filteredOrders = result.data.filter((order: Order) => order.type === "pos");
+        const filteredOrders = result.data.filter(
+          (order: Order) => order.type === "pos"
+        );
         setOrders(filteredOrders);
       }
     } catch (error) {

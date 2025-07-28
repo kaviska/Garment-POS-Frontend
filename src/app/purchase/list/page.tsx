@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ViewModal from "@/components/main/ViewModal";
@@ -13,7 +13,7 @@ import ToastMessage from "@/components/dashboard/ToastMessage";
 
 interface Purchase {
   id: number;
-  image:string | null;
+  image: string | null;
   product: {
     id: number;
     name: string;
@@ -33,21 +33,21 @@ interface Purchase {
   supplier_id: number;
   variation_stocks: Array<{
     id: number;
-    variation_option_id:number
+    variation_option_id: number;
     variation_option: {
       id: number;
       variation_id: number;
       name: string;
     };
   }> | null;
-
-
 }
 
 export default function List() {
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [selectedPurchase, setSelectedPurchase] = useState<Purchase | null>(null);
+  const [selectedPurchase, setSelectedPurchase] = useState<Purchase | null>(
+    null
+  );
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [purchaseModelOpen, setPurchaseModelOpen] = useState(false);
   const [toast, setToast] = useState<{
@@ -72,7 +72,7 @@ export default function List() {
               setPurchaseModelOpen(true);
             }}
           >
-            <UpdateIcon fontSize="small" color="primary" />
+            <EditIcon fontSize="small" color="primary" />
           </button>
           <button
             className="cursor-pointer"
@@ -98,10 +98,9 @@ export default function List() {
     {
       name: "Image",
       cell: (row: Purchase) => {
-        const imageUrl =
-          row.image
-            ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}${row.image}`
-            : row.product && row.product.primary_image
+        const imageUrl = row.image
+          ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}${row.image}`
+          : row.product && row.product.primary_image
             ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}${row.product.primary_image}`
             : null;
 
@@ -128,12 +127,12 @@ export default function List() {
     },
     {
       name: "Web Price",
-      selector: (row: Purchase) => `¥${row.web_price?.toFixed(2) || "0.00"}`,
+      selector: (row: Purchase) => `LKR${row.web_price?.toFixed(2) || "0.00"}`,
       sortable: true,
     },
     {
       name: "POS Price",
-      selector: (row: Purchase) => `¥${row.pos_price?.toFixed(2) || "0.00"}`,
+      selector: (row: Purchase) => `LKR${row.pos_price?.toFixed(2) || "0.00"}`,
       sortable: true,
     },
     {
@@ -158,7 +157,7 @@ export default function List() {
     },
     {
       name: "Cost",
-      selector: (row: Purchase) => `¥${row.cost?.toFixed(2) || "0.00"}`,
+      selector: (row: Purchase) => `LKR${row.cost?.toFixed(2) || "0.00"}`,
       sortable: true,
     },
     {
@@ -180,13 +179,16 @@ export default function List() {
 
   const fetchPurchases = async () => {
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + "/all-stocks", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_SERVER_URL + "/all-stocks",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch purchases");
@@ -231,15 +233,42 @@ export default function List() {
           title="Purchase Details"
           data={purchases}
           fields={[
-            { label: "Product Name", value: selectedPurchase?.product.name || "N/A" },
-            { label: "Quantity", value: selectedPurchase?.quantity.toString() || "N/A" },
-            { label: "Web Price", value: `¥${selectedPurchase?.web_price.toFixed(2)}` || "N/A" },
-            { label: "POS Price", value: `¥${selectedPurchase?.pos_price.toFixed(2)}` || "N/A" },
-            { label: "Web Discount", value: selectedPurchase?.web_discount.toString() || "N/A" },
-            { label: "POS Discount", value: selectedPurchase?.pos_discount.toString() || "N/A" },
-            { label: "Cost", value: `¥${selectedPurchase?.cost.toFixed(2)}` || "N/A" },
-            { label: "Alert Quantity", value: selectedPurchase?.alert_quantity.toString() || "N/A" },
-            { label: "Purchase Date", value: selectedPurchase?.purchase_date || "N/A" },
+            {
+              label: "Product Name",
+              value: selectedPurchase?.product.name || "N/A",
+            },
+            {
+              label: "Quantity",
+              value: selectedPurchase?.quantity.toString() || "N/A",
+            },
+            {
+              label: "Web Price",
+              value: `LKR${selectedPurchase?.web_price.toFixed(2)}` || "N/A",
+            },
+            {
+              label: "POS Price",
+              value: `LKR${selectedPurchase?.pos_price.toFixed(2)}` || "N/A",
+            },
+            {
+              label: "Web Discount",
+              value: selectedPurchase?.web_discount.toString() || "N/A",
+            },
+            {
+              label: "POS Discount",
+              value: selectedPurchase?.pos_discount.toString() || "N/A",
+            },
+            {
+              label: "Cost",
+              value: `LKR${selectedPurchase?.cost.toFixed(2)}` || "N/A",
+            },
+            {
+              label: "Alert Quantity",
+              value: selectedPurchase?.alert_quantity.toString() || "N/A",
+            },
+            {
+              label: "Purchase Date",
+              value: selectedPurchase?.purchase_date || "N/A",
+            },
             { label: "Barcode", value: selectedPurchase?.barcode || "N/A" },
           ]}
         />
@@ -262,9 +291,11 @@ export default function List() {
             purchase_date: selectedPurchase?.purchase_date ?? "",
             barcode: selectedPurchase?.barcode ?? "",
             supplier_id: selectedPurchase?.supplier_id ?? 0,
-            variation_id: selectedPurchase?.variation_stocks?.[0].variation_option.variation_id ?? 0,
-            variation_option_id: selectedPurchase?.variation_stocks?.[0].variation_option_id ?? 0,
-           
+            variation_id:
+              selectedPurchase?.variation_stocks?.[0].variation_option
+                .variation_id ?? 0,
+            variation_option_id:
+              selectedPurchase?.variation_stocks?.[0].variation_option_id ?? 0,
           }}
           onUpdateSuccess={() => {
             setPurchases([]);

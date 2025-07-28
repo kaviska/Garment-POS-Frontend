@@ -3,7 +3,7 @@ import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
 import { useEffect, useState } from "react";
 import type { VariationOption } from "@/types/type";
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ViewModal from "@/components/main/ViewModal";
@@ -13,11 +13,15 @@ import { AlertColor } from "@mui/material";
 import ToastMessage from "@/components/dashboard/ToastMessage";
 
 export default function ViewVariationOptions() {
-  const [variationOptions, setVariationOptions] = useState<VariationOption[]>([]);
+  const [variationOptions, setVariationOptions] = useState<VariationOption[]>(
+    []
+  );
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [selectedVariationOption, setSelectedVariationOption] = useState<VariationOption | null>(null);
+  const [selectedVariationOption, setSelectedVariationOption] =
+    useState<VariationOption | null>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [variationOptionModelOpen, setVariationOptionModelOpen] = useState(false);
+  const [variationOptionModelOpen, setVariationOptionModelOpen] =
+    useState(false);
   const [toast, setToast] = useState<{
     open: boolean;
     message: string;
@@ -50,7 +54,7 @@ export default function ViewVariationOptions() {
               setVariationOptionModelOpen(true);
             }}
           >
-            <UpdateIcon fontSize="small" color="primary" />
+            <EditIcon fontSize="small" color="primary" />
           </button>
           <button
             className="cursor-pointer"
@@ -77,13 +81,16 @@ export default function ViewVariationOptions() {
 
   const fetchVariationOptions = async () => {
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + "/variation-options", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_SERVER_URL + "/variation-options",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch variation options");
@@ -129,7 +136,10 @@ export default function ViewVariationOptions() {
           data={variationOptions}
           fields={[
             { label: "Name", value: selectedVariationOption?.name || "N/A" },
-            { label: "Variation", value: selectedVariationOption?.variation?.name || "N/A" },
+            {
+              label: "Variation",
+              value: selectedVariationOption?.variation?.name || "N/A",
+            },
           ]}
         />
       )}
@@ -138,13 +148,11 @@ export default function ViewVariationOptions() {
         <VariationOptionUpdate
           variationOptionModelOpen={variationOptionModelOpen}
           handleCloseUpdateModal={() => setVariationOptionModelOpen(false)}
-          initialData={
-            {
-              id: selectedVariationOption?.id ?? 0,
-              name: selectedVariationOption?.name ?? "",
-              variation_id: selectedVariationOption?.variation?.id ?? 0,
-            }
-          }
+          initialData={{
+            id: selectedVariationOption?.id ?? 0,
+            name: selectedVariationOption?.name ?? "",
+            variation_id: selectedVariationOption?.variation?.id ?? 0,
+          }}
           onUpdateSuccess={() => {
             setVariationOptions([]);
             fetchVariationOptions();

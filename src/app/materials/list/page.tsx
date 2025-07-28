@@ -4,7 +4,7 @@ import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import ViewModal from "@/components/main/ViewModal";
 import DeleteModal from "@/components/main/DeleteModal";
 import ToastMessage from "@/components/dashboard/ToastMessage";
@@ -62,7 +62,7 @@ export default function MaterialList() {
               setMaterialModelOpen(true);
             }}
           >
-            <UpdateIcon fontSize="small" color="primary" />
+            <EditIcon fontSize="small" color="primary" />
           </button>
           <button
             className="cursor-pointer"

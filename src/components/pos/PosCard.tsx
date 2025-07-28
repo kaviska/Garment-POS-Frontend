@@ -22,7 +22,7 @@ type PosCardProps = {
 
   uiChange: number;
   setUiChange: React.Dispatch<React.SetStateAction<number>>;
-   uiChnageForPos: number;
+  uiChnageForPos: number;
   setUiChnageForPos: React.Dispatch<React.SetStateAction<number>>;
   stocks: Array<{
     id: number;
@@ -44,7 +44,6 @@ export default function PosCard({
   productQuantity,
   uiChnageForPos,
   setUiChnageForPos,
-
 
   stocks,
   uiChange,
@@ -92,8 +91,7 @@ export default function PosCard({
       // Play sound after adding to cart
       playSound();
       setUiChange((prev: number) => prev + 1); // Trigger UI change
-        setUiChnageForPos((prev) => prev + 1); // Trigger UI change
-
+      setUiChnageForPos((prev) => prev + 1); // Trigger UI change
     }
   };
 
@@ -119,7 +117,7 @@ export default function PosCard({
           </div>
         </div>
         <button className="bg-primary mt-3 max-w-[80px] rounded-[5px] text-[10px] text-white">
-          ¥{productPrice}
+          LKR{productPrice}
         </button>
       </div>
 
@@ -188,7 +186,7 @@ export default function PosCard({
                     primary={`Variation: ${
                       stock.variation_stocks[0]?.variation_option?.name || "N/A"
                     }`}
-                    secondary={`Price: ¥${stock.pos_price}`}
+                    secondary={`Price: LKR${stock.pos_price}`}
                   />
                   <Button
                     variant="contained"

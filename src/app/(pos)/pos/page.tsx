@@ -201,7 +201,7 @@ export default function Pos() {
         </div>
         <div className="md:w-[40%] p-4 shadow-lg">
           <div className="mb-3 md:flex hidden justify-between px-3">
-            <Image src={Logo} alt="logo" width={60} height={60} />
+            
             <div className="flex gap-5 mt-4">
               <KeyboardReturnIcon className="text-[#53B175] cursor-pointer" style={{ fontSize: 34 }} onClick={returnHandler} />
               <DashboardIcon className="text-[#53B175] cursor-pointer" style={{ fontSize: 34 }} onClick={dashboardredirect}/>

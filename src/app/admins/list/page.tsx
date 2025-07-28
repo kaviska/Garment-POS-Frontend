@@ -3,7 +3,7 @@ import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
 import { useEffect, useState } from "react";
 import type { Admin } from "@/types/type"; // Import the Admin type
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ViewModal from "@/components/main/ViewModal"; // Import the ViewModal component
@@ -50,7 +50,7 @@ export default function ViewAdmin() {
             className="cursor-pointer"
             onClick={() => console.log("Update clicked")}
           >
-            <UpdateIcon fontSize="small" color="primary" />{" "}
+            <EditIcon fontSize="small" color="primary" />{" "}
             {/* Blue for update */}
           </button>
           <button

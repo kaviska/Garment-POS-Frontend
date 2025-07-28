@@ -3,7 +3,7 @@ import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
 import { useEffect, useState } from "react";
 import type { Supplier } from "@/types/type";
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ViewModal from "@/components/main/ViewModal";
@@ -15,7 +15,9 @@ import ToastMessage from "@/components/dashboard/ToastMessage";
 export default function ViewSupplier() {
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [selectedSupplier, setSelectedSupplier] = useState<Supplier | null>(null);
+  const [selectedSupplier, setSelectedSupplier] = useState<Supplier | null>(
+    null
+  );
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [supplierModelOpen, setSupplierModelOpen] = useState(false);
   const [toast, setToast] = useState<{
@@ -61,12 +63,14 @@ export default function ViewSupplier() {
     },
     {
       name: "Created At",
-      selector: (row: Supplier) => new Date(row.created_at).toLocaleDateString(),
+      selector: (row: Supplier) =>
+        new Date(row.created_at).toLocaleDateString(),
       sortable: true,
     },
     {
       name: "Updated At",
-      selector: (row: Supplier) => new Date(row.updated_at).toLocaleDateString(),
+      selector: (row: Supplier) =>
+        new Date(row.updated_at).toLocaleDateString(),
       sortable: true,
     },
     {
@@ -80,7 +84,7 @@ export default function ViewSupplier() {
               setSupplierModelOpen(true);
             }}
           >
-            <UpdateIcon fontSize="small" color="primary" />
+            <EditIcon fontSize="small" color="primary" />
           </button>
           <button
             className="cursor-pointer"
@@ -107,13 +111,16 @@ export default function ViewSupplier() {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + "/suppliers", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_SERVER_URL + "/suppliers",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch suppliers");
@@ -163,7 +170,10 @@ export default function ViewSupplier() {
             { label: "Mobile", value: selectedSupplier?.mobile || "N/A" },
             { label: "Address", value: selectedSupplier?.address || "N/A" },
             { label: "Bank Name", value: selectedSupplier?.bank_name || "N/A" },
-            { label: "Bank Account Number", value: selectedSupplier?.bank_account_number || "N/A" },
+            {
+              label: "Bank Account Number",
+              value: selectedSupplier?.bank_account_number || "N/A",
+            },
             {
               label: "Created At",
               value: selectedSupplier?.created_at

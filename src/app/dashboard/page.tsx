@@ -1,5 +1,5 @@
 "use client";
-"use client"
+"use client";
 import Card from "@/components/dashboard/Card";
 import BiaxialBarChart from "@/components/dashboard/BiaxialBarChart";
 import PieChartMy from "@/components/dashboard/PieChartMy";
@@ -44,9 +44,9 @@ export default function Dashboard() {
       <h1 className="text-[18px] mb-3">Usefull Data For This Month </h1>
 
       <div className="card-section flex md:flex-row flex-col gap-8">
-        <Card title="Web Sales" number={`¥${webSales.toFixed(2)}`} />
-        <Card title="POS Sales" number={`¥${posSales.toFixed(2)}`} />
-        <Card title="Total Tax" number={`¥${totalTax.toFixed(2)}`} />
+        <Card title="Web Sales" number={`LKR${webSales.toFixed(2)}`} />
+        <Card title="POS Sales" number={`LKR${posSales.toFixed(2)}`} />
+        <Card title="Total Tax" number={`LKR${totalTax.toFixed(2)}`} />
         <Card title="Total Customers" number={`${totalCustomers}`} />
       </div>
 

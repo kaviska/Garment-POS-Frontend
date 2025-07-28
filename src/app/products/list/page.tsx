@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import DataTableMy from "@/components/main/DataTable";
 import Title from "@/components/main/Title";
 import type { Product } from "@/types/type";
-import UpdateIcon from "@mui/icons-material/Update";
+import EditIcon from "@mui/icons-material/Edit";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ViewModal from "@/components/main/ViewModal";
@@ -32,12 +32,12 @@ export default function List() {
   const columns = [
     {
       name: "Actions",
-       style: {
-    maxWidth: "150px", // Set your desired max width
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
+      style: {
+        maxWidth: "150px", // Set your desired max width
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
       cell: (row: Product) => (
         <div className="flex gap-2 cursor-pointer">
           <button
@@ -47,7 +47,7 @@ export default function List() {
               setProductModelOpen(true);
             }}
           >
-            <UpdateIcon fontSize="small" color="primary" />
+            <EditIcon fontSize="small" color="primary" />
           </button>
           <button
             className="cursor-pointer"
@@ -72,12 +72,12 @@ export default function List() {
     },
     {
       name: "Image",
-       style: {
-    maxWidth: "150px", // Set your desired max width
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
+      style: {
+        maxWidth: "150px", // Set your desired max width
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
       cell: (row: Product) => (
         <img
           src={
@@ -88,63 +88,62 @@ export default function List() {
           alt={row.name}
           width={64}
           height={64}
-           className="w-16 h-16 object-cover rounded"
+          className="w-16 h-16 object-cover rounded"
         />
       ),
     },
     {
       name: "Name",
-       style: {
-    maxWidth: "150px", // Set your desired max width
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
+      style: {
+        maxWidth: "150px", // Set your desired max width
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
       selector: (row: Product) => row.name,
       sortable: true,
     },
     {
       name: "Slug",
-       style: {
-    maxWidth: "150px", // Set your desired max width
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
+      style: {
+        maxWidth: "150px", // Set your desired max width
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
       selector: (row: Product) => row.slug,
       sortable: true,
     },
     {
       name: "Description",
-       style: {
-    maxWidth: "400px", // Set your desired max width now
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
+      style: {
+        maxWidth: "400px", // Set your desired max width now
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
       selector: (row: Product) => row.description,
     },
     {
       name: "Category",
-       style: {
-    maxWidth: "150px", // Set your desired max width
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
+      style: {
+        maxWidth: "150px", // Set your desired max width
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
       selector: (row: Product) => row.category?.name?.toString() || "N/A",
     },
     {
       name: "Brand",
-       style: {
-    maxWidth: "150px", // Set your desired max width
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
+      style: {
+        maxWidth: "150px", // Set your desired max width
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
       selector: (row: Product) => row.brand?.name?.toString() || "N/A",
     },
-   
   ];
 
   const fetchProducts = async () => {
@@ -205,8 +204,14 @@ export default function List() {
           fields={[
             { label: "Name", value: selectedProduct?.name || "N/A" },
             { label: "Slug", value: selectedProduct?.slug || "N/A" },
-            { label: "Description", value: selectedProduct?.description || "N/A" },
-            { label: "Category", value: selectedProduct?.category?.name || "N/A" },
+            {
+              label: "Description",
+              value: selectedProduct?.description || "N/A",
+            },
+            {
+              label: "Category",
+              value: selectedProduct?.category?.name || "N/A",
+            },
             { label: "Brand", value: selectedProduct?.brand?.name || "N/A" },
           ]}
         />

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Payment, RestartAlt, Save, History } from "@mui/icons-material";
 import { useState } from "react";
 import ConformPayModel from "./ConformPayModel";
@@ -10,14 +10,20 @@ interface PaySectionProps {
   total: number;
   setUiChange: React.Dispatch<React.SetStateAction<number>>;
   setLocalDiscounts?: React.Dispatch<Record<number, number>>;
-   uiChnageForPos: number;
+  uiChnageForPos: number;
   setUiChnageForPos: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function PaySection({ total, setUiChange,setLocalDiscounts,uiChnageForPos,setUiChnageForPos }: PaySectionProps) {
+export default function PaySection({
+  total,
+  setUiChange,
+  setLocalDiscounts,
+  uiChnageForPos,
+  setUiChnageForPos,
+}: PaySectionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<OrderData | null>(null);
-    const [toast, setToast] = useState<{
+  const [toast, setToast] = useState<{
     open: boolean;
     message: string;
     severity: AlertColor;
@@ -33,9 +39,6 @@ export default function PaySection({ total, setUiChange,setLocalDiscounts,uiChna
 
   //customer screen cjnage
 
- 
-
-
   const reset = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("cart_items");
@@ -43,7 +46,9 @@ export default function PaySection({ total, setUiChange,setLocalDiscounts,uiChna
     }
   };
 
-  const tokenGenartor = (tokens?: Array<{ token_id: string | number; token: string }>) => {
+  const tokenGenartor = (
+    tokens?: Array<{ token_id: string | number; token: string }>
+  ) => {
     if (!tokens || tokens.length === 0) return null;
     const lastToken = tokens[tokens.length - 1];
     return `${lastToken.token_id}|${lastToken.token}`;
@@ -66,26 +71,30 @@ export default function PaySection({ total, setUiChange,setLocalDiscounts,uiChna
     let finalDiscount = discount;
 
     if (typeof window !== "undefined") {
-      const totalDiscountForAllProduct = localStorage.getItem("totalDiscountForAllProduct");
+      const totalDiscountForAllProduct = localStorage.getItem(
+        "totalDiscountForAllProduct"
+      );
       if (totalDiscountForAllProduct) {
-      finalDiscount += Number(totalDiscountForAllProduct);
+        finalDiscount += Number(totalDiscountForAllProduct);
       }
     }
 
     const paymentData = {
       userData,
       paymentData: {
-      method: "cash_on_delivery",
-      due_date: "2030-04-04 15:49:06",
+        method: "cash_on_delivery",
+        due_date: "2030-04-04 15:49:06",
       },
       type: "pos",
       discount: finalDiscount, // Include combined discount
       tax_amount: taxRate, // Calculate tax amount
       shipping_cost: shippingCost, // Include shipping cost
-      cart_items: cartItems.map((item: { stock_id: string; quantity: number }) => ({
-      stock_id: item.stock_id,
-      quantity: item.quantity,
-      })),
+      cart_items: cartItems.map(
+        (item: { stock_id: string; quantity: number }) => ({
+          stock_id: item.stock_id,
+          quantity: item.quantity,
+        })
+      ),
     };
 
     console.log("User Data", userData.tokens);
@@ -96,9 +105,9 @@ export default function PaySection({ total, setUiChange,setLocalDiscounts,uiChna
         {
           method: "POST",
           headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${userData.tokens[userData.tokens.length - 1].token}`,
-        Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userData.tokens[userData.tokens.length - 1].token}`,
+            Accept: "application/json",
           },
           body: JSON.stringify(paymentData),
         }
@@ -149,68 +158,78 @@ export default function PaySection({ total, setUiChange,setLocalDiscounts,uiChna
         className="mt-4 w-full cursor-pointer bg-secondary text-white p-3 flex justify-center items-center"
       >
         <h1 className="text-[40px] font-bold">
-          Total Payable <span>¥{total}</span>
+          Total Payable <span>LKR{total}</span>
         </h1>
       </button>
 
-   {/* Input Section */}
-<div className="mt-6 grid md:grid-cols-3 gap-4">
-  {/* Discount */}
-  <div className="relative">
-    <label htmlFor="discount" className="block mb-1 text-sm font-medium text-gray-700">Discount</label>
-      
-    
-    
-    <input
-      type="number"
-      id="discount"
-      value={discount}
-    
-      onChange={(e) => setDiscount(Number(e.target.value))}
-      className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-      placeholder="Discount"
-    />
-    <span className="absolute right-3 top-[45px] -translate-y-1/2 text-gray-500 pointer-events-none">
-    ¥ 
-    </span>
-  </div>
+      {/* Input Section */}
+      <div className="mt-6 grid md:grid-cols-3 gap-4">
+        {/* Discount */}
+        <div className="relative">
+          <label
+            htmlFor="discount"
+            className="block mb-1 text-sm font-medium text-gray-700"
+          >
+            Discount
+          </label>
 
-  {/* Shipping Cost */}
-  <div className="relative">
-    <label htmlFor="discount" className="block mb-1 text-sm font-medium text-gray-700">Shipping Cost</label>
+          <input
+            type="number"
+            id="discount"
+            value={discount}
+            onChange={(e) => setDiscount(Number(e.target.value))}
+            className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Discount"
+          />
+          <span className="absolute right-3 top-[45px] -translate-y-1/2 text-gray-500 pointer-events-none">
+            LKR
+          </span>
+        </div>
 
-    <input
-      type="number"
-      id="shippingCost"
-      value={shippingCost}
-     
-      onChange={(e) => setShippingCost(Number(e.target.value))}
-      className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-      placeholder="Shipping Cost"
-    />
-    <span className="absolute right-3 top-[45px] -translate-y-1/2 text-gray-500 pointer-events-none">
-      ¥
-    </span>
-  </div>
+        {/* Shipping Cost */}
+        <div className="relative">
+          <label
+            htmlFor="discount"
+            className="block mb-1 text-sm font-medium text-gray-700"
+          >
+            Shipping Cost
+          </label>
 
-  {/* Tax Rate */}
-  <div className="relative">
-    <label htmlFor="discount" className="block mb-1 text-sm font-medium text-gray-700">Tax Rate</label>
+          <input
+            type="number"
+            id="shippingCost"
+            value={shippingCost}
+            onChange={(e) => setShippingCost(Number(e.target.value))}
+            className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Shipping Cost"
+          />
+          <span className="absolute right-3 top-[45px] -translate-y-1/2 text-gray-500 pointer-events-none">
+            LKR
+          </span>
+        </div>
 
-    <input
-      type="number"
-      id="taxRate"
-     
-      onChange={(e) => setTaxRate(Number(e.target.value))}
-      value={taxRate}
-      className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-      placeholder="Tax Rate"
-    />
-    <span className="absolute right-3 top-[45px] -translate-y-1/2 text-gray-500 pointer-events-none">
-      %
-    </span>
-  </div>
-</div>
+        {/* Tax Rate */}
+        <div className="relative">
+          <label
+            htmlFor="discount"
+            className="block mb-1 text-sm font-medium text-gray-700"
+          >
+            Tax Rate
+          </label>
+
+          <input
+            type="number"
+            id="taxRate"
+            onChange={(e) => setTaxRate(Number(e.target.value))}
+            value={taxRate}
+            className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Tax Rate"
+          />
+          <span className="absolute right-3 top-[45px] -translate-y-1/2 text-gray-500 pointer-events-none">
+            %
+          </span>
+        </div>
+      </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4">
         {/* Pay Now Button */}
@@ -233,7 +252,14 @@ export default function PaySection({ total, setUiChange,setLocalDiscounts,uiChna
         </button>
       </div>
 
-      <ConformPayModel isOpen={isOpen} data={data} onClose={() => setIsOpen(false)} setLocalDiscounts={setLocalDiscounts} uiChnageForPos={uiChnageForPos} setUiChnageForPos={setUiChnageForPos}/>
+      <ConformPayModel
+        isOpen={isOpen}
+        data={data}
+        onClose={() => setIsOpen(false)}
+        setLocalDiscounts={setLocalDiscounts}
+        uiChnageForPos={uiChnageForPos}
+        setUiChnageForPos={setUiChnageForPos}
+      />
 
       <ToastMessage
         open={toast.open}
