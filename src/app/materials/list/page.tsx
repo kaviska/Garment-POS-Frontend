@@ -131,16 +131,7 @@ export default function MaterialList() {
       },
       selector: (row: Material) => row.description,
     },
-    {
-      name: "Type",
-      style: {
-        maxWidth: "100px",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-      },
-      selector: (row: Material) => row.type,
-    },
+    
     {
       name: "Unit",
       style: {

@@ -52,7 +52,7 @@ export default function Add() {
       type: "text",
       field: "textArea",
     },
-    { name: "type", label: "Type", type: "text", field: "text" },
+   
     {
       name: "unit",
       label: "Unit",
@@ -117,7 +117,7 @@ export default function Add() {
       const formDataToSend = new FormData();
       formDataToSend.append("name", formData.name);
       formDataToSend.append("description", formData.description);
-      formDataToSend.append("type", formData.type);
+      formDataToSend.append("type", 'material');
       formDataToSend.append("unit", formData.unit);
       formDataToSend.append("cost", formData.cost);
       formDataToSend.append("quantity", formData.quantity);

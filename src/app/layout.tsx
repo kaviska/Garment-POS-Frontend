@@ -452,7 +452,7 @@ export default function RootLayout({
 
         {
           segment: "materials",
-          title: "Materials",
+          title: "Purchase Materials",
           icon: <Inventory2Icon onClick={() => setSelectedPage("materials")} />,
           children: [
             {
@@ -572,7 +572,7 @@ export default function RootLayout({
 
         {
           segment: "purchase",
-          title: "Purchase",
+          title: "Stock",
           icon: <MoneyIcon />,
           children: [
             {
