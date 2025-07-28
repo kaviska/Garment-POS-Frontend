@@ -45,14 +45,11 @@ export default function Add() {
   });
 
   const inputFields = [
+    { name: "supplier", label: "Supplier", type: "text", field: "text" },
+
     { name: "name", label: "Material Name", type: "text", field: "text" },
-    {
-      name: "description",
-      label: "Description",
-      type: "text",
-      field: "textArea",
-    },
-   
+    { name: "gsm", label: "GSM", type: "text", field: "text" },
+    { name: "color", label: "Color", type: "text", field: "text" },
     {
       name: "unit",
       label: "Unit",
@@ -60,17 +57,25 @@ export default function Add() {
       field: "selector",
       endPoint: "units",
     },
-    { name: "cost", label: "Cost", type: "number", field: "number" },
     { name: "quantity", label: "Quantity", type: "number", field: "number" },
-    { name: "supplier", label: "Supplier", type: "text", field: "text" },
-    { name: "gsm", label: "GSM", type: "text", field: "text" },
-    { name: "color", label: "Color", type: "text", field: "text" },
+
+    { name: "cost", label: "Cost", type: "number", field: "number" },
     {
       name: "image",
       label: "Material Image",
       type: "file",
       field: "file",
     },
+
+    {
+      name: "description",
+      label: "Description",
+      type: "text",
+      field: "textArea",
+    },
+   
+    
+    
   ];
 
   const handleChange = (

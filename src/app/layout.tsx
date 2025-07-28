@@ -338,30 +338,8 @@ export default function RootLayout({
         },
 
         { kind: "divider" },
-        { kind: "header", title: "Admin" },
-        {
-          segment: "admins",
-          title: "Admins",
-          icon: (
-            <AdminPanelSettingsIcon onClick={() => setSelectedPage("admins")} />
-          ),
-          children: [
-            {
-              segment: "add",
-              title: "Add Admin",
-              icon: <AddIcon onClick={() => setSelectedPage("admins/add")} />,
-            },
-            {
-              segment: "list",
-              title: "List Admins",
-              icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("admins/list")}
-                />
-              ),
-            },
-          ],
-        },
+        { kind: "header", title: "Customer" },
+       
         {
           segment: "customers",
           title: "Customers",
@@ -554,8 +532,6 @@ export default function RootLayout({
           ],
         },
 
-
-
         { kind: "divider" },
         { kind: "header", title: "Analytics" },
 
@@ -594,7 +570,6 @@ export default function RootLayout({
           ],
         },
 
-       
         { kind: "divider" },
         { kind: "header", title: "Sales" },
         {
@@ -611,11 +586,6 @@ export default function RootLayout({
             },
           ],
         },
-
-       
-
-       
-
 
         { kind: "divider" },
         { kind: "header", title: "HRM" },
@@ -662,9 +632,7 @@ export default function RootLayout({
             },
           ],
         },
-
-      
-        //transfer
+        // transfer
         // { kind: "divider" },
         // { kind: "header", title: "Transfer" },
         // {
@@ -684,11 +652,33 @@ export default function RootLayout({
         //   ],
         // },
 
-        
+        { kind: "divider" },
+        { kind: "header", title: "Admin" },
+        {
+          segment: "admins",
+          title: "Admins",
+          icon: (
+            <AdminPanelSettingsIcon onClick={() => setSelectedPage("admins")} />
+          ),
+          children: [
+            {
+              segment: "add",
+              title: "Add Admin",
+              icon: <AddIcon onClick={() => setSelectedPage("admins/add")} />,
+            },
+            {
+              segment: "list",
+              title: "List Admins",
+              icon: (
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("admins/list")}
+                />
+              ),
+            },
+          ],
+        },
        
-      
 
-        
       ];
 
   const pathname = usePathname();
@@ -707,12 +697,12 @@ export default function RootLayout({
               branding={{
                 logo: (
                   <img
-                    src="/logo.png"
+                    src="/1.png"
                     alt="MUI logo"
                     className="md:block hidden"
                   />
                 ),
-                title: "IYMart",
+                title: "Seven Sell Clothing",
                 homeUrl: "/dashboard",
               }}
               theme={demoTheme}
