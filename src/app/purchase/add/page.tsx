@@ -314,6 +314,13 @@ const [formData, setFormData] = useState<FormData>({
             endPoint: "products?all-products",
           },
         ]),
+        {
+      name: "supplier_id",
+      label: "Supplier",
+      type: "selector",
+      field: "selector",
+      endPoint: "suppliers",
+    },
     { name: "quantity", label: "Quantity", type: "number", field: "number" },
   
     { name: "pos_price", label: "Price", type: "number", field: "number" },
@@ -324,13 +331,7 @@ const [formData, setFormData] = useState<FormData>({
       type: "number",
       field: "number",
     },
-    {
-      name: "supplier_id",
-      label: "Supplier",
-      type: "selector",
-      field: "selector",
-      endPoint: "suppliers",
-    },
+    
     {
       name: "purchase_date",
       label: "Purchase Date",
@@ -351,12 +352,12 @@ const [formData, setFormData] = useState<FormData>({
   return (
     <div className="">
       <Title
-        title="Create Purchase"
+        title="Create Stock"
         breadCrumbs={[
           { label: "Product", href: "/products" },
-          { label: "Purchase", href: "/products" },
+          { label: "Stock", href: "/products" },
         ]}
-        active="add purchase"
+        active="add stock"
       />
 
 <div className="flex flex-wrap gap-3 mt-3">

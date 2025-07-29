@@ -705,7 +705,7 @@ export default function Main() {
                           </div>
                         </td>
                         <td className="border-b border-gray-100 px-4 py-3 text-center text-sm font-medium text-gray-900">
-                          ${item.price}
+                          LKR {item.price}
                         </td>
                         {item.type === "product" ? (
                           <>
@@ -792,7 +792,7 @@ export default function Main() {
                           </span>
                         </div>
                         <div className="text-xs text-gray-500">
-                          ID: {item.id} • Price: ${item.price}
+                          ID: {item.id} • Price: LKR {item.price}
                         </div>
                       </div>
                       <button
@@ -1034,7 +1034,6 @@ export default function Main() {
           <form onSubmit={handleTransferSubmit} className="p-6">
             <TextField
               label="Transfer Description"
-              required
               fullWidth
               multiline
               minRows={3}
@@ -1045,15 +1044,13 @@ export default function Main() {
             />
 
             <FormControl fullWidth className="mb-6" required>
-              <InputLabel id="supplier-select-label">
-                Select Supplier
-              </InputLabel>
+              <InputLabel id="supplier-select-label">Select Factory</InputLabel>
               <Select
                 labelId="supplier-select-label"
                 id="supplier-select"
                 className="my-6"
                 value={selectedSupplier}
-                label="Select Supplier"
+                label="Select Factory"
                 onChange={(e) =>
                   setSelectedSupplier(e.target.value as number | "")
                 }
@@ -1176,7 +1173,9 @@ function StockCard({
         <div className="flex items-center justify-between mt-2">
           <div className="text-sm text-gray-700">
             Price:{" "}
-            <span className="font-bold text-green-600">${stock.pos_price}</span>
+            <span className="font-bold text-green-600">
+              LKR {stock.pos_price}
+            </span>
           </div>
           <div className="text-xs text-gray-500">
             Stock: <span className="font-medium">{stock.quantity}</span>

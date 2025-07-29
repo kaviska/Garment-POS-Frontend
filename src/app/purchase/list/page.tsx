@@ -205,9 +205,9 @@ export default function List() {
         title="Purchase List"
         breadCrumbs={[
           { label: "Product", href: "/products" },
-          { label: "Purchase", href: "/purchase/list" },
+          { label: "Stock", href: "/purchase/list" },
         ]}
-        active="list of purchases"
+        active="list of stocks"
       />
       {purchases.length === 0 ? (
         <div className="flex justify-center items-center h-screen">
