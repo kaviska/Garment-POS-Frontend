@@ -313,21 +313,21 @@ export default function RootLayout({
         { kind: "header", title: "People" },
         {
           segment: "suppliers",
-          title: "Suppliers (Factories)",
+          title: "Factories",
           icon: (
             <EngineeringIcon onClick={() => setSelectedPage("suppliers")} />
           ),
           children: [
             {
               segment: "add",
-              title: "Add Supplier",
+              title: "Add Factory",
               icon: (
                 <AddIcon onClick={() => setSelectedPage("suppliers/add")} />
               ),
             },
             {
               segment: "list",
-              title: "List Suppliers",
+              title: "List Factory",
               icon: (
                 <VisibilityIcon
                   onClick={() => setSelectedPage("suppliers/list")}

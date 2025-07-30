@@ -316,7 +316,7 @@ const [formData, setFormData] = useState<FormData>({
         ]),
         {
       name: "supplier_id",
-      label: "Supplier",
+      label: "Factory",
       type: "selector",
       field: "selector",
       endPoint: "suppliers",
