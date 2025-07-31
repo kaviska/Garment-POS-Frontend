@@ -48,13 +48,7 @@ export default function ViewCustomers() {
       name: "Actions",
       cell: (row: Customer) => (
         <div className="flex gap-2 cursor-pointer">
-          <button
-            className="cursor-pointer"
-            onClick={() => console.log("Update clicked")}
-          >
-            <EditIcon fontSize="small" color="primary" />{" "}
-            {/* Blue for update */}
-          </button>
+         
           <button
             className="cursor-pointer"
             onClick={() => {
@@ -83,7 +77,7 @@ export default function ViewCustomers() {
   const fetchCustomers = async () => {
     try {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_SERVER_URL + "/customers",
+        process.env.NEXT_PUBLIC_SERVER_URL + "/users",
         {
           method: "GET",
           headers: {
@@ -157,7 +151,7 @@ export default function ViewCustomers() {
         <DeletModal
           id={String(selectedCustomer?.id || "")} // Ensure the ID is always a string
           title="customer"
-          url="customers"
+          url="users"
           onClose={() => setDeleteModalOpen(false)} // Close the modal
           setToast={setToast}
           onDeleteSuccess={() => {

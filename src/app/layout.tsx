@@ -354,6 +354,13 @@ export default function RootLayout({
                 />
               ),
             },
+            {
+              segment: "add",
+              title: "Add Customer",
+              icon: (
+                <AddIcon onClick={() => setSelectedPage("customers/add")} />
+              ),
+            }
           ],
         },
 
