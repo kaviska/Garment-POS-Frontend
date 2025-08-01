@@ -595,6 +595,7 @@ export default function RootLayout({
                 />
               ),
             },
+            // update
             {
               segment: "transfer",
               title: "Transfer",
