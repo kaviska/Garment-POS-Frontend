@@ -560,7 +560,7 @@ export default function RootLayout({
           children: [
             {
               segment: "sales",
-              title: "Sales",
+              title: "Product Sales",
               icon: (
                 <BarChartIcon
                   onClick={() => setSelectedPage("reports/sales")}
@@ -587,7 +587,7 @@ export default function RootLayout({
             },
             //material stock
             {
-              segment: "materialStocks",
+              segment: "materials",
               title: "Material Stocks",
               icon: (
                 <BarChartIcon
@@ -597,7 +597,7 @@ export default function RootLayout({
             },
             // update
             {
-              segment: "transfer",
+              segment: "temp-report",
               title: "Transfer",
               icon: (
                 <BarChartIcon
