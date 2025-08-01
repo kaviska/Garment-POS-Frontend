@@ -346,6 +346,13 @@ export default function RootLayout({
           icon: <EngineeringIcon onClick={() => setSelectedPage("admins")} />,
           children: [
             {
+              segment: "add",
+              title: "Add Customer",
+              icon: (
+                <AddIcon onClick={() => setSelectedPage("customers/add")} />
+              ),
+            } ,
+            {
               segment: "list",
               title: "List Customers",
               icon: (
@@ -354,73 +361,36 @@ export default function RootLayout({
                 />
               ),
             },
-            {
-              segment: "add",
-              title: "Add Customer",
-              icon: (
-                <AddIcon onClick={() => setSelectedPage("customers/add")} />
-              ),
-            }
+           
           ],
         },
 
         { kind: "header", title: "Products" },
         { kind: "divider" },
-        {
-          segment: "products",
-          title: "Products",
-          icon: <Inventory2Icon />,
+
+          {
+          segment: "brands",
+          title: "Brands",
+          icon: <RedditIcon onClick={() => setSelectedPage("brands")} />,
           children: [
             {
               segment: "add",
-              title: "Add Product",
-              icon: <AddIcon onClick={() => setSelectedPage("products/add")} />,
+              title: "Add Brand",
+              icon: <AddIcon onClick={() => setSelectedPage("brands/add")} />,
             },
             {
               segment: "list",
-              title: "List Products",
+              title: "List Brands",
               icon: (
                 <VisibilityIcon
-                  onClick={() => setSelectedPage("products/list")}
-                />
-              ),
-            },
-            {
-              segment: "printLabel",
-              title: "Print Label",
-              icon: (
-                <PrintIcon
-                  onClick={() => setSelectedPage("products/printLabel")}
+                  onClick={() => setSelectedPage("brands/list")}
                 />
               ),
             },
           ],
         },
 
-        {
-          segment: "materials",
-          title: "Purchase Materials",
-          icon: <Inventory2Icon onClick={() => setSelectedPage("materials")} />,
-          children: [
-            {
-              segment: "add",
-              title: "Add Material",
-              icon: (
-                <AddIcon onClick={() => setSelectedPage("materials/add")} />
-              ),
-            },
-            {
-              segment: "list",
-              title: "List Materials",
-              icon: (
-                <VisibilityIcon
-                  onClick={() => setSelectedPage("materials/list")}
-                />
-              ),
-            },
-          ],
-        },
-        {
+         {
           segment: "categories",
           title: "Categories",
           icon: <CategoryIcon onClick={() => setSelectedPage("categories")} />,
@@ -444,7 +414,7 @@ export default function RootLayout({
           ],
         },
 
-        {
+         {
           segment: "variations",
           title: "Variations",
           icon: <LinkIcon onClick={() => setSelectedPage("variations")} />,
@@ -495,31 +465,42 @@ export default function RootLayout({
           ],
         },
 
+
+
         {
-          segment: "brands",
-          title: "Brands",
-          icon: <RedditIcon onClick={() => setSelectedPage("brands")} />,
+          segment: "products",
+          title: "Products",
+          icon: <Inventory2Icon />,
           children: [
             {
               segment: "add",
-              title: "Add Brand",
-              icon: <AddIcon onClick={() => setSelectedPage("brands/add")} />,
+              title: "Add Product",
+              icon: <AddIcon onClick={() => setSelectedPage("products/add")} />,
             },
             {
               segment: "list",
-              title: "List Brands",
+              title: "List Products",
               icon: (
                 <VisibilityIcon
-                  onClick={() => setSelectedPage("brands/list")}
+                  onClick={() => setSelectedPage("products/list")}
+                />
+              ),
+            },
+            {
+              segment: "printLabel",
+              title: "Print Label",
+              icon: (
+                <PrintIcon
+                  onClick={() => setSelectedPage("products/printLabel")}
                 />
               ),
             },
           ],
         },
 
-        {
+         {
           segment: "purchase",
-          title: "Stock",
+          title: "Products Purchase",
           icon: <MoneyIcon />,
           children: [
             {
@@ -538,6 +519,36 @@ export default function RootLayout({
             },
           ],
         },
+
+        {
+          segment: "materials",
+          title: "Purchase Materials",
+          icon: <Inventory2Icon onClick={() => setSelectedPage("materials")} />,
+          children: [
+            {
+              segment: "add",
+              title: "Add Material",
+              icon: (
+                <AddIcon onClick={() => setSelectedPage("materials/add")} />
+              ),
+            },
+            {
+              segment: "list",
+              title: "List Materials",
+              icon: (
+                <VisibilityIcon
+                  onClick={() => setSelectedPage("materials/list")}
+                />
+              ),
+            },
+          ],
+        },
+       
+
+       
+      
+
+       
 
         { kind: "divider" },
         { kind: "header", title: "Analytics" },
@@ -567,10 +578,29 @@ export default function RootLayout({
             },
             {
               segment: "stocks",
-              title: "Stocks",
+              title: "Product Stocks",
               icon: (
                 <BarChartIcon
                   onClick={() => setSelectedPage("reports/stocks")}
+                />
+              ),
+            },
+            //material stock
+            {
+              segment: "materialStocks",
+              title: "Material Stocks",
+              icon: (
+                <BarChartIcon
+                  onClick={() => setSelectedPage("reports/materials")}
+                />
+              ),
+            },
+            {
+              segment: "transfer",
+              title: "Transfer",
+              icon: (
+                <BarChartIcon
+                  onClick={() => setSelectedPage("reports/temp-report")}
                 />
               ),
             },

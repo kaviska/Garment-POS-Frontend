@@ -142,16 +142,16 @@ export default function ViewSupplier() {
   return (
     <div>
       <Title
-        title="View Suppliers"
+        title="View Factory"
         breadCrumbs={[
           { label: "People", href: "/suppliers" },
-          { label: "Suppliers", href: "/suppliers" },
+          { label: "Factories", href: "/suppliers" },
         ]}
-        active="list of suppliers"
+        active="list of factories"
       />
       {suppliers.length === 0 ? (
         <div className="flex justify-center items-center h-screen">
-          <h1 className="text-2xl text-gray-500">No suppliers found</h1>
+          <h1 className="text-2xl text-gray-500">No factory found</h1>
         </div>
       ) : (
         <div className="mt-8">

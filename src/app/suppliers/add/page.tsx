@@ -125,12 +125,12 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   return (
     <div className="">
       <Title
-        title="Create Suppliers"
+        title="Create Factory"
         breadCrumbs={[
           { label: "People", href: "/suppliers" },
-          { label: "Suppliers", href: "/suppliers" },
+          { label: "Factories", href: "/suppliers" },
         ]}
-        active="add suppliers"
+        active="add factories"
       />
 
       <div className="mt-7">
@@ -156,7 +156,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             className="px-3 py-3 rounded-[6px] w-full bg-[#53B175] cursor-pointer text-white"
             onClick={handleSubmit}
           >
-            Add Supplier
+            Add Factory
           </button>
         </div>
       </div>
