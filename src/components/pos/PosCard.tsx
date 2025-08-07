@@ -101,7 +101,7 @@ export default function PosCard({
         className="bg-white cursor-pointer hover:scale-105 duration-75 py-5 px-7 shadow-lg rounded-[10px] relative min-w-[175px] max-w-[175px] flex flex-col justify-between"
         onClick={handleOpen}
       >
-        <div className="absolute top-2 right-2 bg-secondary text-white text-[8px] px-2 py-1 rounded-full">
+        <div className="absolute top-2 right-2 bg-red-500 text-white text-[18px] px-2 py-1 rounded-full">
           {productQuantity} Pcs
         </div>
         <div className="flex flex-col gap-3">
@@ -116,7 +116,7 @@ export default function PosCard({
             <span className="font-medium text-[14px]">{productName}</span>
           </div>
         </div>
-        <button className="bg-primary mt-3 max-w-[80px] rounded-[5px] text-[10px] text-white">
+        <button className="bg-primary mt-3 max-w-[100px] rounded-[5px] text-[18px] text-white">
           LKR{productPrice}
         </button>
       </div>
