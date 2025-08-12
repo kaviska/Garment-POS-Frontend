@@ -59,7 +59,7 @@ export default function Login() {
           window.location.href = "/dashboard";
         }
       } else {
-        setError(result.message || "Login failed. Please try again.");
+        setError(result.errors || "Login failed. Please try again.");
       }
     } catch (err) {
       console.error("Error during login:", err);

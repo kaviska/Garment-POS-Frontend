@@ -3,7 +3,7 @@ export async function fetchDataJson<T>(
   options: RequestInit = {}
 ): Promise<T> {
   try {
-    const newUrl = "http://127.0.0.1:8000/api/" + url;
+    const newUrl = "https://slategrey-cassowary-799095.hostingersite.com/api/" + url;
     const token = localStorage.getItem("user-token");
     console.log("Sending Token:", token);
 
